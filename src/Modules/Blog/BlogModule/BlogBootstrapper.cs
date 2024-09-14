@@ -1,6 +1,7 @@
 ﻿using BlogModule.Context;
+using BlogModule.Repositories.Categories;
+using BlogModule.Repositories.Posts;
 using BlogModule.Services;
-using BlogModule.Services.Categories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +16,13 @@ public static class BlogBootstrapper
         {
             option.UseSqlServer(configuration.GetConnectionString("Blog_Context"));
         });
-        service.AddScoped<IBlogFacade, BlogFacade>();
-        service.AddScoped<ICategoryService,CategoryService>();
+        service.AddScoped<IBlogService, BlogService>();
+
+        service.AddScoped<ICategoryRepository,CategoryRepository>();
+
+        service.AddScoped<IPostRepository,PostRepository>();
+
+        service.AddAutoMapper(typeof(MapperProfile).Assembly);
 
         return service;
     }
