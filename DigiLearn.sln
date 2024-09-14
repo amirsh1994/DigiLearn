@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{627E2780-EDD7-454A-BC7C-56F526FA43D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{39F833CF-D201-40A9-A747-9DE37BAD220C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EndPoints", "EndPoints", "{986A05DF-290A-4729-9EA1-914A672CF0CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{1543B1B5-547D-4872-95E5-C90632821EEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog", "Blog", "{05F5CB81-B905-4B0B-BC9A-EA1A4EE87F0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogModule", "src\Modules\Blog\BlogModule\BlogModule.csproj", "{AEEC4F7D-FA85-453D-91AF-6C17EF853444}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEEC4F7D-FA85-453D-91AF-6C17EF853444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEEC4F7D-FA85-453D-91AF-6C17EF853444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEEC4F7D-FA85-453D-91AF-6C17EF853444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEEC4F7D-FA85-453D-91AF-6C17EF853444}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{39F833CF-D201-40A9-A747-9DE37BAD220C} = {627E2780-EDD7-454A-BC7C-56F526FA43D6}
+		{986A05DF-290A-4729-9EA1-914A672CF0CE} = {627E2780-EDD7-454A-BC7C-56F526FA43D6}
+		{1543B1B5-547D-4872-95E5-C90632821EEA} = {627E2780-EDD7-454A-BC7C-56F526FA43D6}
+		{05F5CB81-B905-4B0B-BC9A-EA1A4EE87F0F} = {39F833CF-D201-40A9-A747-9DE37BAD220C}
+		{AEEC4F7D-FA85-453D-91AF-6C17EF853444} = {05F5CB81-B905-4B0B-BC9A-EA1A4EE87F0F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DD98803-2A5E-41F0-90FB-A6CB058AEB6A}
+	EndGlobalSection
+EndGlobal
