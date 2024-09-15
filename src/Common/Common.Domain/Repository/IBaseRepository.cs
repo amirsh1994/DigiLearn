@@ -9,6 +9,7 @@ public interface IBaseRepository<T> where T : BaseEntity
     Task<T?> GetTracking(Guid id);
 
     Task AddAsync(T entity);
+
     void Add(T entity);
 
     Task AddRange(ICollection<T> entities);
@@ -16,6 +17,7 @@ public interface IBaseRepository<T> where T : BaseEntity
     void Update(T entity);
 
     Task<int> Save();
+
     void SaveSync();
 
     Task<bool> ExistsAsync(Expression<Func<T, bool>> expression);

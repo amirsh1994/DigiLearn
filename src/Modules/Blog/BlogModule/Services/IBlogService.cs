@@ -121,7 +121,7 @@ internal class BlogService(ICategoryRepository categoryRepository, IMapper mappe
 
     public async Task<OperationResult> EditPost(EditPostCommand command)
     {
-        var oldPost = await postRepository.GetAsync(command.Id);
+        var oldPost = await postRepository.GetTracking(command.Id);
 
         if (oldPost == null) return OperationResult.NotFound();
 
