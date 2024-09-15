@@ -1,9 +1,9 @@
-﻿using Common.Domain;
+﻿namespace BlogModule.Services.DTOs.Query;
 
-namespace BlogModule.Domain;
-
-class Post : BaseEntity
+public class BlogPostDto
 {
+    public Guid Id { get; set; }
+
     public string Title { get; set; }
 
     public string Slug { get; set; }
@@ -19,5 +19,4 @@ class Post : BaseEntity
     public long Visit { get; set; }
 
     public string ImageName { get; set; }
-
 }

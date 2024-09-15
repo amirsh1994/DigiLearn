@@ -7,7 +7,13 @@ namespace BlogModule.Repositories.Posts;
 
 internal interface IPostRepository:IBaseRepository<Post>
 {
-
+    void Delete(Post post);
 }
 
-internal class PostRepository(BlogContext context):BaseRepository<Post, BlogContext>(context), IPostRepository;
+internal class PostRepository(BlogContext context):BaseRepository<Post, BlogContext>(context), IPostRepository
+{
+    public void Delete(Post post)
+    {
+        context.Posts.Remove(post);
+    }
+}

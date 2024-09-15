@@ -2,6 +2,8 @@
 using BlogModule.Repositories.Categories;
 using BlogModule.Repositories.Posts;
 using BlogModule.Services;
+using Common.Application.FileUtil.Interfaces;
+using Common.Application.FileUtil.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,8 @@ public static class BlogBootstrapper
         service.AddScoped<ICategoryRepository,CategoryRepository>();
 
         service.AddScoped<IPostRepository,PostRepository>();
+
+        service.AddScoped<ILocalFileService,LocalFileService>();
 
         service.AddAutoMapper(typeof(MapperProfile).Assembly);
 
