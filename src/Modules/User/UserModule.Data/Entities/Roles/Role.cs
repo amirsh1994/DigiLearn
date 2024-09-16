@@ -3,7 +3,7 @@ using Common.Domain;
 
 namespace UserModule.Data.Entities.Roles;
 
-internal class Role : BaseEntity
+public class Role : BaseEntity
 {
     [MaxLength(50)]
     [Required]

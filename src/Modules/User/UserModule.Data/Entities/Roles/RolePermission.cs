@@ -2,7 +2,7 @@
 
 namespace UserModule.Data.Entities.Roles;
 
-internal class RolePermission:BaseEntity
+public class RolePermission : BaseEntity
 {
     public Guid RoleId { get; set; }
 
