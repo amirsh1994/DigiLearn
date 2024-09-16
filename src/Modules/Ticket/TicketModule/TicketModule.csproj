@@ -25,7 +25,6 @@
 
 
 	<ItemGroup>
-	  <Folder Include="Core\Services\" />
 	  <Folder Include="Data\Entities\" />
 	</ItemGroup>
 
