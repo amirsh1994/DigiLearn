@@ -18,4 +18,14 @@ public class UserDto
 
     public string Avatar { get; set; }
 
+    public List<RoleDto> Roles { get; set; } = [];
+
+}
+
+public class RoleDto
+{
+    public Guid Id { get; set; }
+
+    public string Title { get; set; }
+
 }
