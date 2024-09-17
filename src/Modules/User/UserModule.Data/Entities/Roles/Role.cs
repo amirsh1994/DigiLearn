@@ -8,4 +8,6 @@ public class Role : BaseEntity
     [MaxLength(50)]
     [Required]
     public string Name { get; set; }
+
+    public List<RolePermission> RolePermissions { get; set; } = [];
 }

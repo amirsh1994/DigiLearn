@@ -1,5 +1,7 @@
-namespace DigiLearn.Web
-{
+using UserModule.Core;
+
+namespace DigiLearn.Web;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -8,6 +10,7 @@ namespace DigiLearn.Web
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.InitUserModule(builder.Configuration);
 
             var app = builder.Build();
 
@@ -31,4 +34,4 @@ namespace DigiLearn.Web
             app.Run();
         }
     }
-}
+
