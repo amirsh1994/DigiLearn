@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using AngleSharp.Dom;
+using Common.Application;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,7 @@ public static class UserModuleBootstrapper
         service.AddScoped<IUserFacade,UserFacade>();
         service.AddValidatorsFromAssembly(typeof(RegisterUserValidator).Assembly);
         service.AddMediatR(typeof(UserModuleBootstrapper).Assembly);
+        service.RegisterCommonApplication();
         return service;
     }
 }
