@@ -19,6 +19,8 @@ public interface ITicketService
 
     Task<TicketDto> GetTicket(Guid ticketId);
 
+    Task<TicketFilterResult> GetTicketsByFilter(TicketFilterParams filterParams);
+
 
 }
 
@@ -81,5 +83,29 @@ internal class TicketService(TicketContext db, IMapper mapper) : ITicketService
            .FirstOrDefaultAsync(x=>x.Id== ticketId);
 
        return mapper.Map<TicketDto>(ticket);
+    }
+
+    public async Task<TicketFilterResult> GetTicketsByFilter(TicketFilterParams filterParams)
+    {
+        var result = db.Tickets.AsQueryable();
+        if (filterParams.UserId!=null)
+        {
+            result = result.Where(x => x.UserId == filterParams.UserId);
+        }
+
+        var skip = (filterParams.PageId - 1) * filterParams.Take;
+        var data = new TicketFilterResult
+        {
+            Data =await result.Skip(skip).Take(filterParams.Take).Select(x=> new TicketFilterData
+            {
+                Id = x.Id,
+                UserId = x.UserId,
+                Title = x.Title,
+                CreationDate =x.CreationDate,
+                Status = x.TicketStatus
+            }).ToListAsync()
+        };
+        data.GeneratePaging(result,filterParams.Take,filterParams.PageId);
+        return data;
     }
 }

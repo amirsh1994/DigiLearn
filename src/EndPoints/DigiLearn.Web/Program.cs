@@ -1,4 +1,5 @@
 using DigiLearn.Web.Infrastructure.JwtUtil;
+using TicketModule;
 using UserModule.Core;
 
 namespace DigiLearn.Web;
@@ -12,7 +13,9 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
         builder.Services.JwtAuthenticationConfig(builder.Configuration);
-        builder.Services.InitUserModule(builder.Configuration);
+        builder.Services
+            .InitUserModule(builder.Configuration)
+            .InitTicketModule(builder.Configuration);
 
         var app = builder.Build();
 
