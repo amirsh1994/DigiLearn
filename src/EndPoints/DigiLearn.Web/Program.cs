@@ -26,7 +26,7 @@ public class Program
 
         app.Use((context, next) =>
         {
-            var token = context.Request.Cookies["Token"]?.ToString();
+            var token = context.Request.Cookies["digi_Token"]?.ToString();
             if (string.IsNullOrWhiteSpace(token) == false)
             {
                 context.Request.Headers.Append("Authorization", $"Bearer {token}");

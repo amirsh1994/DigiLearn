@@ -44,7 +44,7 @@ public class LoginModel(IUserFacade userFacade, IConfiguration configuration) : 
 
         if (IsRememberMe)
         {
-            HttpContext.Response.Cookies.Append("Token", token, new CookieOptions()
+            HttpContext.Response.Cookies.Append("digi_Token", token, new CookieOptions()
             {
                 HttpOnly = true
                 ,
@@ -55,7 +55,7 @@ public class LoginModel(IUserFacade userFacade, IConfiguration configuration) : 
         }
         else
         {
-            HttpContext.Response.Cookies.Append("Token", token, new CookieOptions()
+            HttpContext.Response.Cookies.Append("digi_Token", token, new CookieOptions()
             {
                 HttpOnly = true
                 ,
