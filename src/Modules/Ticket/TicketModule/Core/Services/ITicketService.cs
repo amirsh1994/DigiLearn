@@ -17,7 +17,7 @@ public interface ITicketService
 
     Task<OperationResult> CloseTicket(Guid ticketId);
 
-    Task<TicketDto> GetTicket(Guid ticketId);
+    Task<TicketDto?> GetTicket(Guid ticketId);
 
     Task<TicketFilterResult> GetTicketsByFilter(TicketFilterParams filterParams);
 
@@ -44,6 +44,10 @@ internal class TicketService(TicketContext db, IMapper mapper) : ITicketService
             return OperationResult.NotFound();
         }
 
+        if (string.IsNullOrWhiteSpace(command.Text))
+        {
+            return OperationResult.Error("متن پیام نمی تواند خالی باشد");
+        }
         var message = new TicketMessage()
         {
             Text = command.Text.SanitizeText()
@@ -75,7 +79,7 @@ internal class TicketService(TicketContext db, IMapper mapper) : ITicketService
         return OperationResult.Success();
     }
 
-    public async Task<TicketDto> GetTicket(Guid ticketId)
+    public async Task<TicketDto?> GetTicket(Guid ticketId)
     {
        var ticket=await db.Tickets
            .Include(x=>x.TicketMessages)

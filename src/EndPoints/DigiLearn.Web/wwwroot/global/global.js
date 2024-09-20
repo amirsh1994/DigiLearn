@@ -52,6 +52,7 @@ function deleteItem(url, description) {
         showCancelButton: true,
         cancelButtonText: "خیر",
         preConfirm: () => {
+            debugger;
             var token = $("#token-value input").val();
             $.ajax({
                 url: url,

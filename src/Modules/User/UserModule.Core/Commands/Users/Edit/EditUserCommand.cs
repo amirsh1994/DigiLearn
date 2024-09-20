@@ -14,8 +14,6 @@ public class EditUserCommand : IBaseCommand
     public string Family { get; set; }
 
     public string? Email { get; set; }
-
-
 }
 
 

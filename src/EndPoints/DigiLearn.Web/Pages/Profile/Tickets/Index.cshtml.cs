@@ -1,7 +1,5 @@
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.RazorUtils;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using TicketModule.Core.DTOs.Tickets;
 using TicketModule.Core.Services;
 
@@ -15,11 +13,10 @@ public class IndexModel(ITicketService ticketService) : BaseRazorFilter<TicketFi
         var result = await ticketService.GetTicketsByFilter(new TicketFilterParams
         {
             PageId = FilterParams.PageId,
-            Take = FilterParams.Take,
+            Take = 2,
             UserId = User.GetUserId()
         });
         FilterResult = result;
-
     }
 }
 

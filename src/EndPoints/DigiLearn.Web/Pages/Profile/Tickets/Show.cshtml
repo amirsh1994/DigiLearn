@@ -1,0 +1,122 @@
+﻿@page "{ticketId:guid}/{handler?}"
+@using Common.Application.DateUtil
+@using DigiLearn.Web.Infrastructure
+@using TicketModule.Data.Entities
+@model DigiLearn.Web.Pages.Profile.Tickets.ShowModel
+
+@{
+    ViewData["title"] = Model.Ticket.Title;
+}
+{
+<link rel="stylesheet" href="/css/profile.min.css">
+}
+
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 breadcrumb">
+                <ul class="">
+                    <li>
+                        <a href="/">
+                            خانه
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/profile">
+                            پنل کاربری
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/profile/tickets">
+                            تیکت ها
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="current">
+                            @Model.Ticket.Title
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <partial name="Shared/_ProfileSideBar" />
+            <div class="col-12 col-xl-9 col-lg-9 col-md-8 profile-body">
+                <div class="row ">
+                    <div class="col-12 info shadow pl-0 pr-0">
+                        <p class="title">
+                            @ViewData["title"]
+
+                            @switch (Model.Ticket.TicketStatus)
+                            {
+                                case TicketStatus.Pending:
+                                    <span class="badge badge-info">درحال برسی</span>
+                                    break;
+                                case TicketStatus.Answered:
+                                    <span class="badge badge-success">پاسخ داده شده</span>
+                                    break;
+                                case TicketStatus.Closed:
+                                    <span class="badge badge-danger"> بسته شده</span>
+                                    break;
+
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
+
+                           @if (Model.Ticket.TicketStatus!=TicketStatus.Closed)
+                            {
+                                <delete-item class="btn btn-sm  btn-close pull-left" description="آیا از بستن تیکت اطمینان دارید؟" url="@Url.Page("Show","CloseTicket",new{ticketId=Model.Ticket.Id})"> بستن تیکت </delete-item>
+                            }
+                        </p>
+                        <div class="ticket-Body">
+
+                            @foreach (var item in Model.Ticket.TicketMessages.OrderBy(x=>x.CreationDate))
+                            {
+                                if (item.UserID == User.GetUserId())
+                                {
+                                    <div class="chat">
+                                        <div class="chat-m">
+                                            <div class="chat-me">
+                                                <p>@item.Text</p>
+                                                <span>@item.CreationDate.ToPersianDateTime()</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    <div class="chat">
+                                        <div class="chat-y">
+                                            <div class="chat-you">
+                                                <label>@item.UserFullName</label>
+                                                <p>@item.Text</p>
+                                                <span>@item.CreationDate.ToPersianDateTime()</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <form class="send-message" method="post">
+                            @if (Model.Ticket.TicketStatus==TicketStatus.Closed)
+                            {
+                                <input type="text" disabled="" class="form-control text-center" placeholder=" امکان ثبت پیام در این تیکت وجو ندارد">
+                      
+                            }
+                            else
+                            {
+                                <input type="text" asp-for="Text" class="form-control" placeholder="متن پیام">
+                                <button type="submit" class="btn btn-sm btn-sendMessage">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

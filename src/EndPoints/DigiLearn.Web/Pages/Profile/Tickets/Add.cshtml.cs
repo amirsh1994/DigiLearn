@@ -2,7 +2,6 @@
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using TicketModule.Core.DTOs.Tickets;
 using TicketModule.Core.Services;
 using UserModule.Core.Services;
