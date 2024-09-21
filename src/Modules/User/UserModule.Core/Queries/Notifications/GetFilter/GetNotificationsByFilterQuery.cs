@@ -13,7 +13,10 @@ public class GetNotificationsByFilterQueryHandler(UserContext db) : IBaseQueryHa
     public async Task<NotificationFilterResult> Handle(GetNotificationsByFilterQuery request, CancellationToken cancellationToken)
     {
         var @param = request.FilterParams;
-        var result = db.Notifications.Where(x => x.UserId == @param.UserId).AsQueryable();
+        var result = db.Notifications
+            .Where(x => x.UserId == @param.UserId)
+            .OrderBy(x=>x.IsSeen)
+            .AsQueryable();
         if (@param.IsSeen != null)
         {
             if (@param.IsSeen.Value == true)

@@ -3,6 +3,7 @@ using MediatR;
 using UserModule.Core.Commands.Notifications.Create;
 using UserModule.Core.Commands.Notifications.Delete;
 using UserModule.Core.Commands.Notifications.DeleteAll;
+using UserModule.Core.Commands.Notifications.Seen;
 using UserModule.Core.Queries._DTOs;
 using UserModule.Core.Queries.Notifications.GetFilter;
 
@@ -15,6 +16,8 @@ public interface INotificationFacade
     Task<OperationResult> DeleteNotification(DeleteNotificationCommand command);
 
     Task<OperationResult> DeleteAllNotifications(DeleteAllNotificationCommand command);
+
+    Task<OperationResult> SeenNotification(SeenNotificationCommand command);
 
     Task<NotificationFilterResult> GetNotificationsByFilter(NotificationFilterParams @params);
 }
@@ -33,6 +36,11 @@ public class NotificationFacade(IMediator mediator) : INotificationFacade
     }
 
     public async Task<OperationResult> DeleteAllNotifications(DeleteAllNotificationCommand command)
+    {
+        return await mediator.Send(command);
+    }
+
+    public async Task<OperationResult> SeenNotification(SeenNotificationCommand command)
     {
         return await mediator.Send(command);
     }

@@ -12,7 +12,7 @@
             <a href="#" onclick="changePage('1')" class="first">1</a>
         }
 
-        @for (var item = Model.StartPage; item < Model.PageCount; item++)
+        @for (var item = Model.StartPage; item <= Model.EndPage; item++)
         {
             if (item == Model.CurrentPage)
             {

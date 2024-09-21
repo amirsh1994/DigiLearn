@@ -10,13 +10,21 @@ public class DeleteItem:TagHelper
 
     public string Class { get; set; } = "btn btn-danger btn-sm mb-2";
 
+    public bool IsButtonTag { get; set; } = true;
+
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
-        output.TagName = "button";
+        if (IsButtonTag)
+        {
+            output.TagName = "button";
+        }
+        else
+        {
+            output.TagName = "a";
+        }
         output.Attributes.Add("onClick", $"deleteItem('{Url}','{Description}')");
         //output.Attributes.Add("class", "btn btn-danger btn-sm mb-2");
         output.Attributes.Add("class", Class);
-
         base.Process(context, output);
     }
 }
