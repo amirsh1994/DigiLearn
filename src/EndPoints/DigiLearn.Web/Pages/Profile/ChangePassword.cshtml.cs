@@ -2,8 +2,7 @@
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UserModule.Core.Commands.ChangePassword;
+using UserModule.Core.Commands.Users.ChangePassword;
 using UserModule.Core.Services;
 
 namespace DigiLearn.Web.Pages.Profile;

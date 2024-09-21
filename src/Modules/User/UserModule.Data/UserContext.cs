@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UserModule.Data.Entities.Notifications;
 using UserModule.Data.Entities.Roles;
 using UserModule.Data.Entities.Users;
 
@@ -14,5 +15,6 @@ public class UserContext(DbContextOptions<UserContext>options):DbContext(options
 
     public DbSet<RolePermission> RolePermissions { get; set; }
 
+    public DbSet<UserNotification> Notifications { get; set; }
 
 }

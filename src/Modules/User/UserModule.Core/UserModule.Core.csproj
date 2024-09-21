@@ -18,6 +18,8 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Notifications\Create\" />
+    <Folder Include="Commands\Notifications\DeleteAll\" />
     <Folder Include="Commands\Roles\" />
     <Folder Include="Services\" />
     <Folder Include="Queries\Roles\" />

@@ -20,9 +20,15 @@ public static class UserModuleBootstrapper
             options.UseSqlServer(configuration.GetConnectionString("User_Context"));
         });
         service.AddAutoMapper(typeof(MapperProfile).Assembly);
+
         service.AddScoped<IUserFacade,UserFacade>();
+
+        service.AddScoped<INotificationFacade,NotificationFacade>();
+
         service.AddValidatorsFromAssembly(typeof(RegisterUserValidator).Assembly);
+
         service.AddMediatR(typeof(UserModuleBootstrapper).Assembly);
+
         service.RegisterCommonApplication();
         return service;
     }

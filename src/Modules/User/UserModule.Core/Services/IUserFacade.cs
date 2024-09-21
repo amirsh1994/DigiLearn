@@ -1,6 +1,6 @@
 ﻿using Common.Application;
 using MediatR;
-using UserModule.Core.Commands.ChangePassword;
+using UserModule.Core.Commands.Users.ChangePassword;
 using UserModule.Core.Commands.Users.Edit;
 using UserModule.Core.Commands.Users.Register;
 using UserModule.Core.Queries._DTOs;

@@ -4,9 +4,9 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using UserModule.Data;
 
-namespace UserModule.Core.Commands.ChangePassword;
+namespace UserModule.Core.Commands.Users.ChangePassword;
 
-public class ChangeUserPasswordCommand:IBaseCommand
+public class ChangeUserPasswordCommand : IBaseCommand
 {
     public Guid UserId { get; set; }
 
@@ -16,17 +16,17 @@ public class ChangeUserPasswordCommand:IBaseCommand
 }
 
 
-public class ChangePasswordCommandHandler(UserContext db):IBaseCommandHandler<ChangeUserPasswordCommand>
+public class ChangePasswordCommandHandler(UserContext db) : IBaseCommandHandler<ChangeUserPasswordCommand>
 {
     public async Task<OperationResult> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
     {
         var user = await db.Users.FirstOrDefaultAsync(x => x.Id == request.UserId, cancellationToken);
-        if (user==null)
+        if (user == null)
         {
             return OperationResult.NotFound();
         }
         var hashedPassword = user.password;
-        if (Sha256Hasher.IsCompare(hashedPassword,request.CurrentPassword)==false)
+        if (Sha256Hasher.IsCompare(hashedPassword, request.CurrentPassword) == false)
         {
             return OperationResult.Error("پسورد جاری اشتباه هست");
         }
@@ -38,7 +38,7 @@ public class ChangePasswordCommandHandler(UserContext db):IBaseCommandHandler<Ch
 }
 
 
-public class ChangeUserPasswordCommandValidator:AbstractValidator<ChangeUserPasswordCommand>
+public class ChangeUserPasswordCommandValidator : AbstractValidator<ChangeUserPasswordCommand>
 {
     public ChangeUserPasswordCommandValidator()
     {

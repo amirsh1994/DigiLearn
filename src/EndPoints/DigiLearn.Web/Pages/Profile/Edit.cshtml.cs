@@ -1,11 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Common.Application;
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserModule.Core.Commands.Users.Edit;
-using UserModule.Core.Queries._DTOs;
 using UserModule.Core.Services;
 
 namespace DigiLearn.Web.Pages.Profile;

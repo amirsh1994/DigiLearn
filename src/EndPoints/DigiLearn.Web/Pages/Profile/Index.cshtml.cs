@@ -1,19 +1,29 @@
 using DigiLearn.Web.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserModule.Core.Queries._DTOs;
 using UserModule.Core.Services;
 
 namespace DigiLearn.Web.Pages.Profile;
 
-    public class IndexModel(IUserFacade userFacade) : PageModel
-    {
-        public UserDto UserDto { get; set; }
+public class IndexModel(IUserFacade userFacade, INotificationFacade notificationFacade):PageModel
+{
+    public UserDto UserDto { get; set; }
 
-        public async Task OnGet()
+    public List<NotificationFilterData> NewNotifications { get; set; }
+
+    public async Task OnGet()
+    {
+        var user = await userFacade.GetUserByPhoneNumber(User.GetPhoneNumber());
+        UserDto = user;
+
+        var result =await notificationFacade.GetNotificationsByFilter(new NotificationFilterParams
         {
-            var user = await userFacade.GetUserByPhoneNumber(User.GetPhoneNumber());
-            UserDto = user;
-        }
+            PageId = 1,
+            Take = 5,
+            UserId = UserDto!.Id,
+            IsSeen = false
+        });
+        NewNotifications = result.Data;
     }
+}
 
