@@ -1,5 +1,5 @@
-﻿namespace Common.Domain.Exceptions
-{
+﻿namespace Common.Domain.Exceptions;
+
     public class NullOrEmptyDomainDataException : BaseDomainException
     {
         public NullOrEmptyDomainDataException()
@@ -17,4 +17,4 @@
                 throw new NullOrEmptyDomainDataException($"{nameOfField} is null or empty");
         }
     }
-}
+
