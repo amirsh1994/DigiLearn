@@ -1,4 +1,4 @@
-﻿namespace CoreModule.Domain.Enums;
+﻿namespace CoreModule.Domain.Courses.Enums;
 
 public enum CourseStatus
 {

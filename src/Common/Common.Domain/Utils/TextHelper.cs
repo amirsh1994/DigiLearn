@@ -74,6 +74,7 @@ public static class TextHelper
 
         return true;
     }
+
     public static string GenerateCode(int length)
     {
         var random = new Random();
