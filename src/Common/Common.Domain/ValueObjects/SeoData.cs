@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
+﻿namespace Common.Domain.ValueObjects;
 
-namespace Common.Domain.ValueObjects
-{
     public class SeoData : ValueObject
     {
         private SeoData()
         {
         }
-
         public static SeoData CreateEmpty()
         {
             return new SeoData();
@@ -22,8 +19,10 @@ namespace Common.Domain.ValueObjects
         }
 
         public string? MetaTitle { get; private set; }
+
         public string? MetaDescription { get; private set; }
+
         public string? MetaKeyWords { get; private set; }
+
         public string? Canonical { get; private set; }
     }
-}

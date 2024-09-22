@@ -16,7 +16,6 @@ public class SeenNotificationCommandHandler(UserContext db):IBaseCommandHandler<
             return OperationResult.NotFound();
         }
         notification.IsSeen = true;
-        db.Update(notification);
         await db.SaveChangesAsync(cancellationToken);
         return OperationResult.Success();
     }
