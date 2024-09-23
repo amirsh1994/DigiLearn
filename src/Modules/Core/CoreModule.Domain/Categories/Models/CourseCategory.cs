@@ -1,11 +1,11 @@
 ﻿using Common.Domain;
 using Common.Domain.Exceptions;
 using Common.Domain.Utils;
-using CoreModule.Domain.Category.DomainServices;
+using CoreModule.Domain.Categories.DomainServices;
 
-namespace CoreModule.Domain.Category.Models;
+namespace CoreModule.Domain.Categories.Models;
 
-public class CourseCategory : BaseEntity
+public class CourseCategory:AggregateRoot
 {
     public string Title { get;private set; }
 

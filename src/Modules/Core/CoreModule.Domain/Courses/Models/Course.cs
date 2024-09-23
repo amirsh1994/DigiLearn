@@ -7,7 +7,7 @@ using CoreModule.Domain.Courses.Enums;
 
 namespace CoreModule.Domain.Courses.Models;
 
-public class Course : BaseEntity
+public class Course : AggregateRoot
 {
     public Guid TeacherId { get; private set; }
 

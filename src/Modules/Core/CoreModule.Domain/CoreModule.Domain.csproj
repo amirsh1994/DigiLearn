@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Category\Models\" />
-    <Folder Include="Category\DomainServices\" />
-    <Folder Include="Category\Repositories\" />
+    <Folder Include="Categories\Repository\" />
     <Folder Include="Courses\Models\" />
     <Folder Include="Courses\Events\" />
     <Folder Include="Courses\Exceptions\" />
     <Folder Include="Courses\Enums\" />
+    <Folder Include="Courses\Repository\" />
   </ItemGroup>
 
   <ItemGroup>
