@@ -57,7 +57,4 @@ public class Teacher:AggregateRoot
             Status = TeacherStatus.Active;
         }
     }
-
-
-
 }

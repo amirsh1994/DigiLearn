@@ -8,6 +8,25 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\CoreModule.Domain\CoreModule.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Category\Create\" />
+    <Folder Include="Category\Edit\" />
+    <Folder Include="Category\Delete\" />
+    <Folder Include="Course\Create\" />
+    <Folder Include="Course\Edit\" />
+    <Folder Include="Course\Episodes\Add\" />
+    <Folder Include="Course\Episodes\Accept\" />
+    <Folder Include="Course\Episodes\Delete\" />
+    <Folder Include="Course\Episodes\Edit\" />
+    <Folder Include="Course\Sections\AddSection\" />
+    <Folder Include="Course\Sections\EditSection\" />
+    <Folder Include="Course\Sections\DeleteSection\" />
+    <Folder Include="Course\Sections\" />
+    <Folder Include="_Utilities\" />
+    <Folder Include="Teacher\RejectRequest\" />
   </ItemGroup>
 
 </Project>

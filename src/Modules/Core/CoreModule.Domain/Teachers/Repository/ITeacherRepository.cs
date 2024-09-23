@@ -5,5 +5,5 @@ namespace CoreModule.Domain.Teachers.Repository;
 
 public interface ITeacherRepository:IBaseRepository<Teacher>
 {
-    
+    void Delete(Teacher teacher);
 }
