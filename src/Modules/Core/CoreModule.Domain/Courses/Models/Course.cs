@@ -37,13 +37,14 @@ public class Course : AggregateRoot
 
     public List<Section> Sections { get; } = [];
 
-    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug,ICourseDomainService domainService)
+    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug, ICourseDomainService domainService)
     {
-        Guard(title, description, imageName,slug);
-        if (domainService.IsSlugExists(slug))
-        {
-            throw new InvalidDomainDataException("duplicated slug when create course");
-        }
+        Guard(title, description, imageName, slug);
+
+        if (Slug!=slug)
+            if (domainService.IsSlugExists(slug))
+                throw new InvalidDomainDataException("duplicated slug when create course");
+
         TeacherId = teacherId;
         Title = title;
         Description = description;
@@ -59,7 +60,28 @@ public class Course : AggregateRoot
         Slug = slug;
     }
 
-    private void Guard(string title, string description, string imageName,string slug)
+    public void Edit(string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, CourseStatus courseStatus, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug, ICourseDomainService domainService)
+    {
+        Guard(title, description, imageName, slug);
+        if (domainService.IsSlugExists(slug))
+        {
+            throw new InvalidDomainDataException("duplicated slug when Edit course");
+        }
+        Title = title;
+        Description = description;
+        ImageName = imageName;
+        VideoName = videoName;
+        Price = price;
+        LastUpdate = DateTime.Now;
+        CourseLevel = courseLevel;
+        CourseStatus = courseStatus;
+        SeoData = seoData;
+        SubCategoryId = subCategoryId;
+        CategoryId = categoryId;
+        Slug = slug;
+    }
+
+    private void Guard(string title, string description, string imageName, string slug)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));
