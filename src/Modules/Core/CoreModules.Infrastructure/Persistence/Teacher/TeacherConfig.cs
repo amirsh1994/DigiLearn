@@ -12,6 +12,8 @@ public class TeacherConfig:IEntityTypeConfiguration<Domain.Teachers.Models.Teach
 
         builder.HasIndex(x => x.UserName).IsUnique();
 
+        builder.ToTable("Teachers");
+
         builder.Property(x => x.UserName)
             .IsRequired()
             .IsUnicode(false)

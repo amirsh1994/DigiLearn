@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Common.Domain;
+﻿using Common.Domain;
+using CoreModule.Domain.Courses.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CoreModule.Infrastructure.Persistence.Users;
+namespace CoreModule.Query._Data.Entities;
 
-internal class User : BaseEntity
+[Table("users", Schema = "dbo")]
+internal class UserQueryModel : BaseEntity
 {
+
     [MaxLength(50)]
     public string Name { get; set; }
     [MaxLength(50)]
