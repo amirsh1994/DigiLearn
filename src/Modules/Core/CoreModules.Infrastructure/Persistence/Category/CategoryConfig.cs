@@ -24,7 +24,7 @@ public class CategoryConfig : IEntityTypeConfiguration<CourseCategory>
     }
 }
 
-public class CategoryRepository(CoreModuleEfContext context):BaseRepository<CourseCategory, CoreModuleEfContext>(context),ICourseCategoryRepository
+public class CourseCategoryRepository(CoreModuleEfContext context):BaseRepository<CourseCategory, CoreModuleEfContext>(context),ICourseCategoryRepository
 {
     public async Task Delete(CourseCategory category)
     {
