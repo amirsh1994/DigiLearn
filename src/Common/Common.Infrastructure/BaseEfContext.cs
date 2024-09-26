@@ -2,8 +2,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Common.Infrastructure
-{
+namespace Common.Infrastructure;
+
     public class BaseEfContext<T> : DbContext where T : DbContext
     {
         private readonly IMediator _mediator;
@@ -37,4 +37,4 @@ namespace Common.Infrastructure
             }
         }
     }
-}
+
