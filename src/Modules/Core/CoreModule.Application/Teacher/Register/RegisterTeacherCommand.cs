@@ -2,7 +2,6 @@
 using Common.Application.FileUtil.Interfaces;
 using CoreModule.Application._Utilities;
 using CoreModule.Domain.Teachers.DomainServices;
-using CoreModule.Domain.Teachers.Enums;
 using CoreModule.Domain.Teachers.Repository;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
@@ -11,11 +10,11 @@ namespace CoreModule.Application.Teacher.Register;
 
 public class RegisterTeacherCommand:IBaseCommand
 {
-    public Guid UserId { get; private set; }
+    public Guid UserId { get;  set; }
 
-    public string UserName { get; private set; }
+    public string UserName { get;  set; }
 
-    public IFormFile CvFileName { get; private set; }
+    public IFormFile CvFileName { get;  set; }
 
 }
 

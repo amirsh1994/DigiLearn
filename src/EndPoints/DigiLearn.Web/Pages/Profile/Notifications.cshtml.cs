@@ -1,7 +1,6 @@
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserModule.Core.Commands.Notifications.Delete;
 using UserModule.Core.Commands.Notifications.DeleteAll;
 using UserModule.Core.Commands.Notifications.Seen;

@@ -19,6 +19,9 @@ public class TeacherConfig:IEntityTypeConfiguration<Domain.Teachers.Models.Teach
             .IsUnicode(false)
             .HasMaxLength(20);
 
+        builder.Property(x => x.CvFileName)
+            .HasMaxLength(300);
+
         builder.HasOne<User>()
             .WithOne()
             .HasForeignKey<Domain.Teachers.Models.Teacher>(x => x.UserId);

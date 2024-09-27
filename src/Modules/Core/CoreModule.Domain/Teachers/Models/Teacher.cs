@@ -16,6 +16,11 @@ public class Teacher:AggregateRoot
 
     public string CvFileName { get; private set; }
 
+    private Teacher()
+    {
+        
+    }
+
     public Teacher(Guid userId, string userName, string cvFileName, ITeacherDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(cvFileName, nameof(cvFileName));
@@ -32,7 +37,7 @@ public class Teacher:AggregateRoot
         }
 
         UserId = userId;
-        UserName = userName;
+        UserName = userName.ToLower();
         Status = TeacherStatus.Pending;
         CvFileName = cvFileName;
     }

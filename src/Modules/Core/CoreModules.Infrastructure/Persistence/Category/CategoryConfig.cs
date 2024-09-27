@@ -17,6 +17,9 @@ public class CategoryConfig : IEntityTypeConfiguration<CourseCategory>
         builder.HasIndex(x => x.Slug)
             .IsUnique();
 
+        builder.Property(x => x.Title)
+            .HasMaxLength(50);
+
         builder.Property(x => x.Slug)
             .IsRequired()
             .IsUnicode(false)

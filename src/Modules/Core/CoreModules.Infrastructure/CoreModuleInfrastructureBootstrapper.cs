@@ -1,5 +1,6 @@
 ﻿using CoreModule.Domain.Categories.Repository;
 using CoreModule.Domain.Courses.Repository;
+using CoreModule.Domain.Teachers.DomainServices;
 using CoreModule.Domain.Teachers.Repository;
 using CoreModule.Infrastructure.Persistence;
 using CoreModule.Infrastructure.Persistence.Category;

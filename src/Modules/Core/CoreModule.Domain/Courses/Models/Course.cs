@@ -37,11 +37,16 @@ public class Course : AggregateRoot
 
     public List<Section> Sections { get; } = [];
 
+    private Course()
+    {
+
+    }
+
     public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
 
-        if (Slug!=slug)
+        if (Slug != slug)
             if (domainService.IsSlugExists(slug))
                 throw new InvalidDomainDataException("duplicated slug when create course");
 
@@ -174,6 +179,7 @@ public class Section : BaseEntity
 
     public int DisplayOrder { get; private set; }
 
+
     public Section(string title, int displayOrder, Guid courseId)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
@@ -211,7 +217,8 @@ public class Episode : BaseEntity
 
     public string? AttachmentName { get; private set; }
 
-    public bool IsActive { get; private set; }
+     public bool IsActive { get; private set; }
+
 
     public Episode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, Guid sectionId, string englishTitle)
     {

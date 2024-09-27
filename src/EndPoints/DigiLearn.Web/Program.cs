@@ -1,3 +1,6 @@
+using Common.Application.FileUtil.Interfaces;
+using Common.Application.FileUtil.Services;
+using CoreModule.Config;
 using DigiLearn.Web.Infrastructure.JwtUtil;
 using TicketModule;
 using UserModule.Core;
@@ -15,7 +18,10 @@ public class Program
         builder.Services.JwtAuthenticationConfig(builder.Configuration);
         builder.Services
             .InitUserModule(builder.Configuration)
-            .InitTicketModule(builder.Configuration);
+            .InitTicketModule(builder.Configuration)
+            .InitCoreModule(builder.Configuration);
+        builder.Services.AddScoped<ILocalFileService, LocalFileService>();
+        builder.Services.AddScoped<IFtpFileService, FtpFileService>();
 
         var app = builder.Build();
 

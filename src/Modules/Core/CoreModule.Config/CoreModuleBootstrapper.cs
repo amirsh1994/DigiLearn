@@ -1,6 +1,14 @@
 ﻿using Common.Application;
+using Common.Application.FileUtil.Interfaces;
+using Common.Application.FileUtil.Services;
+using CoreModule.Application.Category;
 using CoreModule.Application.Category.Create;
+using CoreModule.Application.Course;
 using CoreModule.Application.Course.Create;
+using CoreModule.Application.Teacher;
+using CoreModule.Domain.Categories.DomainServices;
+using CoreModule.Domain.Courses.DomainServices;
+using CoreModule.Domain.Teachers.DomainServices;
 using CoreModule.Facade;
 using CoreModule.Infrastructure;
 using CoreModule.Query;
@@ -21,6 +29,9 @@ public static class CoreModuleBootstrapper
         service.AddMediatR(typeof(CreateCourseCategoryCommand).Assembly);
         service.AddValidatorsFromAssembly(typeof(CreateCourseCommand).Assembly);
         service.RegisterCommonApplication();
+        service.AddScoped<ICategoryDomainService, CourseCategoryDomainService>();
+        service.AddScoped<ITeacherDomainService,TeacherDomainService>();
+        service.AddScoped<ICourseDomainService,CourseDomainService>();
         return service;
     }
 }
