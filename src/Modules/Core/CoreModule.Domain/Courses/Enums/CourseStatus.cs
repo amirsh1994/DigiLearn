@@ -15,3 +15,9 @@ public enum CourseLevel
     Expert
 }
 
+public enum CourseActionStatus
+{
+    Pending,
+    Active,
+    DiActive
+}

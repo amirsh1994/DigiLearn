@@ -33,6 +33,8 @@ public class Course : AggregateRoot
 
     public CourseStatus CourseStatus { get; private set; }
 
+    public CourseActionStatus Status { get; set; }
+
     public SeoData SeoData { get; private set; }
 
     public List<Section> Sections { get; } = [];
@@ -42,7 +44,7 @@ public class Course : AggregateRoot
 
     }
 
-    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug, ICourseDomainService domainService)
+    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug,CourseActionStatus status ,ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
 
@@ -63,6 +65,7 @@ public class Course : AggregateRoot
         SubCategoryId = subCategoryId;
         CategoryId = categoryId;
         Slug = slug;
+        Status = status;
     }
 
     public void Edit(string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, CourseStatus courseStatus, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug, ICourseDomainService domainService)
@@ -217,7 +220,7 @@ public class Episode : BaseEntity
 
     public string? AttachmentName { get; private set; }
 
-     public bool IsActive { get; private set; }
+    public bool IsActive { get; private set; }
 
 
     public Episode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, Guid sectionId, string englishTitle)

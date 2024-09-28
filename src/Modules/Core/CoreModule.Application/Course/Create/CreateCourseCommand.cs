@@ -33,6 +33,8 @@ public class CreateCourseCommand : IBaseCommand
 
     public CourseLevel CourseLevel { get; set; }
 
+    public CourseActionStatus Status { get; set; }
+
     public SeoData SeoData { get; set; }
 }
 
@@ -58,7 +60,7 @@ public class CreateCourseCommandHandler(ICourseRepository repository, ICourseDom
             request.TeacherId, request.Title, request.Description
             , imageName, videoPath, request.Price, request.CourseLevel
             , request.SeoData, request.SubCategoryId
-            , request.SubCategoryId, request.Slug, domainService
+            , request.CategoryId, request.Slug,request.Status, domainService
             ){ Id = courseId };
 
         repository.Add(course);

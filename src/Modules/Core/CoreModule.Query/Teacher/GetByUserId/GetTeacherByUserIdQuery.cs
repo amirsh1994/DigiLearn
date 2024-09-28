@@ -17,7 +17,9 @@ internal class GetTeacherByUserIdQueryHandler(QueryContext db) : IBaseQueryHandl
 {
     public async Task<TeacherDto?> Handle(GetTeacherByUserIdQuery request, CancellationToken cancellationToken)
     {
-        var model = await db.Teachers.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == request.UserId, cancellationToken);
+        var model = await db.Teachers.Include(x => x.User)
+            .AsSplitQuery()
+            .FirstOrDefaultAsync(x => x.UserId == request.UserId, cancellationToken);
         if (model == null)
         {
             return null;

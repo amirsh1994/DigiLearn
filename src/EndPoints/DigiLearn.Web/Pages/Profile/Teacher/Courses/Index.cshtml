@@ -1,0 +1,88 @@
+﻿@page
+@using CoreModule.Application._Utilities
+@using Common.Application
+@using Common.Application.DateUtil
+@using CoreModule.Domain.Courses.Enums
+@model DigiLearn.Web.Pages.Profile.Teacher.Courses.IndexModel
+@{
+    ViewData["title"] = "دوره های مدرس";
+    Layout = "Shared/_ProfileLayout";
+}
+
+<div class="row ">
+    <div class="col-12 info shadow pl-0 pr-0">
+        <p class="title">
+            <i class="fa fa-paper-plane"></i>
+           @ViewData["title"]
+        </p>
+
+        <br>
+        <a asp-page="Add" class="btn btn-save mr-2 mb-4 float-right">ثبت دوره جدید</a>
+        <div class="info-body p-2">
+            <div class="table-responsive">
+                <h5>
+                    <i class="fa fa-list"></i>
+                    لیست دوره ها
+                </h5>
+                <table class="table   table-hover  table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th>عکس</th>
+                            <th>عنوان</th>
+                            <th>قیمت</th>
+                            <td>وضعیت</td>
+                            <th>تاریخ ثبت</th>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.FilterResult.Data)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@CoreModuleDirectories.GetCourseImage(item.ImageName)" alt="Alternate Text" style="max-width: 200px" />
+                                </td>
+
+                                <td>@item.Title</td>
+                                <td>@item.Price.TooMan(true)</td>
+                                <td>
+                                    @switch (item.CourseStatus)
+                                    {
+                                        case CourseActionStatus.Pending:
+                                            <span class="badge badge-info">درحال بررسی</span>
+                                            break;
+                                        case CourseActionStatus.Active:
+                                            <span class="badge badge-success">فعال</span>
+                                            break;
+                                        case CourseActionStatus.DiActive:
+                                            <span class="badge badge-danger"> غیر فعال</span>
+                                            break;
+
+                                        default:
+                                            throw new ArgumentOutOfRangeException();
+                                    }
+                                </td>
+                                <td>
+                                    @item.CreationDate.ToPersianDate()
+                                </td>
+                                <td>
+                                    <a asp-page="Show" asp-route-ticketId="@item.Id" class="btn btn-sm btn-primary">نمایش</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (Model.FilterResult.Data.Any() == false)
+                        {
+                            <tr class="text-center">
+                                <td colspan="5">
+                                    <h5 class="text-danger">دوره ای جهت نمایش وجود ندارد</h5>
+                                </td>
+                            </tr>
+                        }
+                        </>
+                </table>
+            </div>
+            <hr class="mt-0">
+            <partial name="Shared/_Pagination" model="Model.FilterResult" />
+        </div>
+    </div>
+</div>

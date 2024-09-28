@@ -1,6 +1,7 @@
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using CoreModule.Config;
+using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.JwtUtil;
 using TicketModule;
 using UserModule.Core;
@@ -22,6 +23,7 @@ public class Program
             .InitCoreModule(builder.Configuration);
         builder.Services.AddScoped<ILocalFileService, LocalFileService>();
         builder.Services.AddScoped<IFtpFileService, FtpFileService>();
+        builder.Services.AddTransient<TeacherActionFilter>();
 
         var app = builder.Build();
 
