@@ -20,6 +20,7 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
         var q = db.Courses
             .Include(x=>x.Sections)
             .ThenInclude(x=>x.Episodes)
+            .AsSplitQuery()
             .OrderByDescending(x=>x.LastUpdate).AsQueryable();
 
         if (@params.TeacherId!=null)

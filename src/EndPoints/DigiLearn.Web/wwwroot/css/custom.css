@@ -14,3 +14,11 @@
 .input-validation-error {
     border-color: red;
 }
+
+.col-md-6 {
+    margin-top:1rem
+}
+
+.col-md-12 {
+    margin-top:1rem
+}

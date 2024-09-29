@@ -57,6 +57,8 @@ public class Program
 
         app.MapRazorPages();
 
+        app.MapDefaultControllerRoute();
+
         app.Run();
     }
 }

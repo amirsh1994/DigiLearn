@@ -27,7 +27,7 @@ public class CreateCourseCommand : IBaseCommand
 
     public IFormFile ImageFile { get; set; }
 
-    public IFormFile? VideoFileName { get; set; }
+    public IFormFile? VideoFile { get; set; }
 
     public int Price { get; set; }
 
@@ -47,13 +47,13 @@ public class CreateCourseCommandHandler(ICourseRepository repository, ICourseDom
         string? videoPath = null;
         Guid courseId = Guid.NewGuid();
 
-        if (request.VideoFileName != null)
+        if (request.VideoFile != null)
         {
-            if (request.VideoFileName.IsValidMp4File() == false)
+            if (request.VideoFile.IsValidMp4File() == false)
             {
                 return OperationResult.Error("فرمت ویدیو وارد شده نامعتبر می باشد...!");
             }
-            videoPath = await ftp.SaveFileAndGenerateName(request.VideoFileName, CoreModuleDirectories.CourseDemo(courseId));
+            //videoPath = await ftp.SaveFileAndGenerateName(request.VideoFile, CoreModuleDirectories.CourseDemo(courseId));
         }
         var course = new Domain.Courses.Models.Course
             (

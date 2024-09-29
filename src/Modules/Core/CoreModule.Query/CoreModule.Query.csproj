@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Category\GetAll\" />
+    <Folder Include="Category\GetChildren\" />
+    <Folder Include="Category\_DTOs\" />
     <Folder Include="_DTOs\" />
     <Folder Include="Teacher\GetById\" />
     <Folder Include="Teacher\GetList\" />
