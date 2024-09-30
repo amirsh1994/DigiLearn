@@ -21,7 +21,7 @@ public class AjaxController(ICourseCategoryFacade categoryFacade,ILocalFileServi
     }
 
     [Route("/Upload/ImageUploader")]
-    public async Task<IActionResult> UploadImage(IFormFile upload)
+    public async Task<IActionResult> UploadImage(IFormFile?  upload)
     {
         if (upload==null)
         {

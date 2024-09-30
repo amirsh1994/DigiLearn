@@ -6,7 +6,7 @@ using UserModule.Data.Entities.Users;
 
 namespace DigiLearn.Web.Infrastructure;
 
-public class TeacherActionFilter(ITeacherFacade teacherFacade) : ActionFilterAttribute
+public class TeacherActionFilter(ITeacherFacade teacherFacade):ActionFilterAttribute
 {
     public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
@@ -14,7 +14,6 @@ public class TeacherActionFilter(ITeacherFacade teacherFacade) : ActionFilterAtt
         {
             context.Result = new RedirectResult("/");
         }
-
         var teacher = await teacherFacade.GetTeacherByUserId(context.HttpContext.User.GetUserId());
         if (teacher is not { Status: TeacherStatus.Active })
         {

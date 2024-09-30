@@ -32,6 +32,8 @@ internal class CourseQueryModel : BaseEntity
 
     public CourseStatus CourseStatus { get; set; }
 
+    public CourseActionStatus Status { get; set; }
+
     public SeoData SeoData { get; set; }
 
     public List<SectionQueryModel> Sections { get; } = [];
