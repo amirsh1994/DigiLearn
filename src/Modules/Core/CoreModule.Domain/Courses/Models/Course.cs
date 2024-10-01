@@ -44,7 +44,7 @@ public class Course : AggregateRoot
 
     }
 
-    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug,CourseActionStatus status ,ICourseDomainService domainService)
+    public Course(Guid teacherId, string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug, CourseActionStatus status, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
 
@@ -127,7 +127,7 @@ public class Course : AggregateRoot
         Sections.Remove(section);
     }
 
-    public void AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoExtenstion, string? attachmentExtenstion, bool isActive, Guid sectionId, string englishTitle)
+    public Episode AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoExtenstion, string? attachmentExtenstion, bool isActive, Guid sectionId, string englishTitle)
     {
         var section = Sections.FirstOrDefault(x => x.Id == sectionId);
 
@@ -144,7 +144,7 @@ public class Course : AggregateRoot
         if (string.IsNullOrWhiteSpace(attachmentExtenstion) == false)
             atName = $"{episodeTitle}.{attachmentExtenstion}";
 
-        var vidName = $"{episodeTitle}.{videoExtenstion}";
+        var vidName = $"{episodeTitle}{videoExtenstion}";
 
         if (isActive)
         {
@@ -155,7 +155,7 @@ public class Course : AggregateRoot
             }
         }
 
-        section.AddEpisode(title, token, timeSpan, vidName, atName, isActive, englishTitle);
+        return section.AddEpisode(title, token, timeSpan, vidName, atName, isActive, englishTitle);
     }
 
     public void AcceptEpisode(Guid episodeId)
@@ -178,7 +178,7 @@ public class Section : BaseEntity
 
     public string Title { get; private set; }
 
-    public IEnumerable<Episode> Episodes { get; private set; } = [];
+    public List<Episode> Episodes { get; private set; } = [];
 
     public int DisplayOrder { get; private set; }
 
@@ -191,9 +191,11 @@ public class Section : BaseEntity
         CourseId = courseId;
     }
 
-    public void AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, string englishTitle)
+    public Episode AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, string englishTitle)
     {
-        Episodes = Episodes.Append(new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id, englishTitle));
+        var episode = new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id, englishTitle);
+        Episodes.Add(episode);
+        return episode;
     }
 
     public void Edit(string title, int displayOrder)
