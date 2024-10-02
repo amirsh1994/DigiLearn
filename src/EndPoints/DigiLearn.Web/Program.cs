@@ -1,6 +1,7 @@
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using CoreModule.Config;
+using CoreModule.Infrastructure.Migrations;
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.JwtUtil;
 using TicketModule;
