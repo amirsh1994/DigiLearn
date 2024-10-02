@@ -1,0 +1,51 @@
+﻿@page
+@model DigiLearn.Web.Areas.Admin.Pages.Courses.Categories.IndexModel
+@{
+    ViewData["title"] = "مدیریت دسته بندی دوره ها";
+    ViewData["selected"] = "courses_categories";
+}
+
+<a asp-page="Add" class="btn btn-success mb-1">افزودن موردجدید</a>
+<div class="card">
+    <div class="table table-responsive card-body p-0 mb-0 ">
+        <table class="table table-bordered table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>عنوان</th>
+                    <th>slug</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Categories)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Slug</td>
+                        <td>
+
+                            <a asp-page="Add" asp-route-parentId="@item.Id" class="btn btn-primary btn-sm mb-2">افزودن زیر دسته بندی</a>
+                            <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm mb-2">ویرایش</a>
+                            <delete-item>حذف</delete-item>
+                        </td>
+                    </tr>
+                    @if (item.Children.Any())
+                    {
+                       @foreach (var c in item.Children)
+                       {
+                           <tr style="opacity: .8;color: #4b96dd">
+                               <td class="pl-5" >@c.Title</td>
+                               <td class="pl-5" >@c.Slug</td>
+                               <td class="pl-5">
+                                   <a asp-page="Edit" asp-route-id="@c.Id" class="btn btn-primary btn-sm mb-2">ویرایش</a>
+                                   <delete-item>حذف</delete-item>
+                               </td>
+                           </tr>
+                       }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @*<partial name="_Pagination"model="null"/>*@
+</div>

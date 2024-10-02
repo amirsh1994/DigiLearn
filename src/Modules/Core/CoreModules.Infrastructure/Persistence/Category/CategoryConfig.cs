@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoreModule.Infrastructure.Persistence.Category;
 
-public class CategoryConfig : IEntityTypeConfiguration<CourseCategory>
+public class CategoryConfig:IEntityTypeConfiguration<CourseCategory>
 {
     public void Configure(EntityTypeBuilder<CourseCategory> builder)
     {
@@ -24,6 +24,11 @@ public class CategoryConfig : IEntityTypeConfiguration<CourseCategory>
             .IsRequired()
             .IsUnicode(false)
             .HasMaxLength(100);
+
+        builder.HasMany<CourseCategory>()
+            .WithOne()
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasForeignKey(x => x.ParentId);
     }
 }
 

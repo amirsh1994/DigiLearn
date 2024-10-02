@@ -13,7 +13,7 @@ public class CourseCategoryDto : BaseDto
     public List<CourseCategoryChild> Children { get; set; } = [];
 }
 
-public class CourseCategoryChild : BaseDto
+public class CourseCategoryChild:BaseDto
 {
     public string Title { get; set; }
 
