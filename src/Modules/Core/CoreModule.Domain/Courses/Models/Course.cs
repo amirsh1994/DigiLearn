@@ -144,7 +144,7 @@ public class Course : AggregateRoot
         if (string.IsNullOrWhiteSpace(attachmentExtenstion) == false)
             atName = $"{episodeTitle}.{attachmentExtenstion}";
 
-        var vidName = $"{episodeTitle}{videoExtenstion}";
+        var vidName = $"{episodeTitle}{videoExtenstion}"; //6_JavaSpring3.mp4
 
         if (isActive)
         {
