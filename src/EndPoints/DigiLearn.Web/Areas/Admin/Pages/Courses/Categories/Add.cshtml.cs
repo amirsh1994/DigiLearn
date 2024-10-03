@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Common.Domain.Utils;
+using CoreModule.Application.Category.AddChild;
 using CoreModule.Application.Category.Create;
 using CoreModule.Facade.Category;
 using DigiLearn.Web.Infrastructure.RazorUtils;
@@ -23,15 +24,30 @@ public class AddModel(ICourseCategoryFacade categoryFacade) : BaseRazor
     {
     }
 
-    public async Task<IActionResult> OnPost()
+    public async Task<IActionResult> OnPost([FromQuery]Guid ? parentId)
     {
-        var result = await categoryFacade.Create(new CreateCourseCategoryCommand
+        if (parentId!=null)
         {
-            Title = Title,
-            Slug = Slug.ToSlug()
+            var result = await categoryFacade.AddChild(new AddChildCourseCategoryCommand()
+                {
+                    Title = Title,
+                    Slug = Slug.ToSlug(),
+                    ParentId = (Guid)parentId,
+                }
+            );
+            return RedirectAndShowAlert(result, RedirectToPage("Index"));
         }
-        );
-        return RedirectAndShowAlert(result, RedirectToPage("Index"));
+        else
+        {
+            var result = await categoryFacade.Create(new CreateCourseCategoryCommand
+                {
+                    Title = Title,
+                    Slug = Slug.ToSlug()
+                }
+            );
+            return RedirectAndShowAlert(result, RedirectToPage("Index"));
+        }
+       
     }
 }
 

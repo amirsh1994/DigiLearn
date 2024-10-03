@@ -32,17 +32,28 @@ public class CategoryConfig:IEntityTypeConfiguration<CourseCategory>
     }
 }
 
-public class CourseCategoryRepository(CoreModuleEfContext context):BaseRepository<CourseCategory, CoreModuleEfContext>(context),ICourseCategoryRepository
+public class CourseCategoryRepository(CoreModuleEfContext context):BaseRepository<CourseCategory,CoreModuleEfContext>(context),ICourseCategoryRepository
 {
     public async Task Delete(CourseCategory category)
     {
-        if (await context.Courses.AnyAsync(x => x.CategoryId == category.Id || x.SubCategoryId == category.Id))
+        var categoryHasCourse = await context.Courses.AnyAsync(x => x.CategoryId == category.Id || x.SubCategoryId == category.Id);
+        if (categoryHasCourse)
         {
             throw new Exception("این دسته بندی دارای چندین دوره می باشد ...");
         }
-
-        //ToDo Should Remove Children
-
+        var children = context.Categories.Where(x => x.ParentId == category.Id).ToList();
+        if (children.Any())
+        {
+            foreach (var child in children)
+            {
+                var isAnyCourse = await context.Courses.AnyAsync(x => x.CategoryId == child.Id || x.SubCategoryId == child.Id);
+                if (isAnyCourse)
+                {
+                    throw new Exception("این دسته بندی دارای چندین دوره می باشد ...");
+                }
+                context.Remove(child);
+            }
+        }
         context.Remove(category);
         await context.SaveChangesAsync();
     }

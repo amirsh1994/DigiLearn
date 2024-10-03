@@ -26,7 +26,7 @@ public class CourseCategory : AggregateRoot
             throw new InvalidDomainDataException("duplicated data slug is already exists");
         }
         Title = title;
-        Slug = slug;
+        Slug = slug.ToSlug();
         ParentId = parentId;
     }
 
@@ -41,7 +41,7 @@ public class CourseCategory : AggregateRoot
             }
         }
         Title = title;
-        Slug = slug;
+        Slug = slug.ToSlug();
     }
 
     void Guard(string title, string slug)
