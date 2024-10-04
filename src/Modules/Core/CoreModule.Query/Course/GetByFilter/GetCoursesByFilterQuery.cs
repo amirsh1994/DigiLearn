@@ -9,8 +9,6 @@ public class GetCoursesByFilterQuery(CourseFilterParams filterParams):BaseQueryF
 {
 
 }
-
-
 internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandler<GetCoursesByFilterQuery, CourseFilterResult>
 {
     public async Task<CourseFilterResult> Handle(GetCoursesByFilterQuery request, CancellationToken cancellationToken)
@@ -27,6 +25,11 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
         {
             q = q.Where(x => x.TeacherId == @params.TeacherId);
         }
+
+        if (@params.ActionStatus!=null)
+        {
+            q = q.Where(x => x.Status == @params.ActionStatus);
+        }
         var skip = (@params.PageId - 1)*@params.Take;
         var take = @params.Take;
         var data = await q.Skip(skip).Take(take).ToListAsync(cancellationToken);
@@ -35,6 +38,7 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
             Data =data.Select(x=>new CourseFilterData
             {
                 Id = x.Id,
+                CourseStatus = x.Status,
                 CreationDate = x.CreationDate,
                 ImageName = x.ImageName,
                 Title = x.Title,

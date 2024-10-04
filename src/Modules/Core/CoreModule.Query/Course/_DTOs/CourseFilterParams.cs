@@ -8,6 +8,7 @@ public class CourseFilterParams:BaseFilterParam
 {
     public Guid ? TeacherId { get; set; }
 
+    public CourseActionStatus ? ActionStatus { get; set; }
 
 }
 public class CourseFilterData:BaseDto

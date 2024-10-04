@@ -9,23 +9,23 @@
 
         @if (Model.StartPage>1)
         {
-            <a href="#" onclick="changePage('1')" class="first">1</a>
+            <a href="#" onclick="changePage(1)" class="first">1</a>
         }
 
         @for (var item = Model.StartPage; item <= Model.EndPage; item++)
         {
             if (item == Model.CurrentPage)
             {
-                <a href="#" class="current-page">@item</a>
+                <a  class="current-page">@item</a>
             }
             else
             {
-                <a href="#" onclick="changePage('@item')">@item</a>
+                <a href="#" onclick="changePage(@item)">@item</a>
             }
         }
         @if (Model.EndPage < Model.PageCount)
         {
-            <a href="#" onclick="changePage('@Model.PageCount')" class="last">@Model.PageCount</a>
+            <a href="#" onclick="changePage(@Model.PageCount)" class="last">@Model.PageCount</a>
         }
     </div>
 }

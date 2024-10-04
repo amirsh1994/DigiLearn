@@ -1,0 +1,56 @@
+﻿@page "{courseId}"
+@model DigiLearn.Web.Areas.Admin.Pages.Courses.Sections.IndexModel
+@{
+    ViewData["title"] = "مدیریت سرفصل های دوره";
+    ViewData["selected"] = "courses_index";
+    var counter = 1;
+}
+
+
+<div class="collapsible">
+    @foreach (var item in Model.Course.Sections)
+    {
+        <div class="card collapse-header">
+            <div id="#c_@item.Id" class="card-header" data-toggle="collapse" role="button" data-target="#r_@item.Id" aria-expanded="false">
+                <span class="collapse-title">
+                    @item.Title
+                </span>
+            </div>
+            <div id="r_@item.Id" role="tabpanel" aria-labelledby="c_@item.Id" class="collapse">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>عنوان</th>
+                            <th>زمان</th>
+                            <th>وضیعیت</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in item.Episodes)
+                        {
+                            <tr>
+                                <td>@counter</td>
+                                <td>@e.Title</td>
+                                <td>@e.TimeSpan</td>
+                                <td>
+                                    @if (e.IsActive)
+                                    {
+                                        <label>فعال</label>
+                                    }
+                                    else
+                                    {
+                                        <label>غیرفعال</label>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+                            counter += 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
