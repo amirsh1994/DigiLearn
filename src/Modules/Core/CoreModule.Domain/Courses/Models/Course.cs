@@ -170,6 +170,18 @@ public class Course : AggregateRoot
         episode.ToggleStatus();
         LastUpdate = DateTime.Now;
     }
+
+    public Episode RemoveEpisode(Guid episodeId)
+    {
+        var section = Sections.FirstOrDefault(x => x.Episodes.Any(e =>e.Id == episodeId));
+        if (section==null)
+        {
+            throw new InvalidDomainDataException("episode not found for delete");
+        }
+        var episode = section.Episodes.First(x=>x.Id==episodeId);
+        section.Episodes.Remove(episode);
+        return episode;
+    }
 }
 
 public class Section : BaseEntity

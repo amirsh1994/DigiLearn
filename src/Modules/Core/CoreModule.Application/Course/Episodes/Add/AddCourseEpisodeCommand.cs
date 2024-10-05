@@ -60,12 +60,12 @@ public class AddCourseEpisodeCommandHandler(ICourseRepository repository, IFtpFi
 
     private async Task SaveFile(AddCourseEpisodeCommand request, Episode episode)
     {
-        await ftp.SaveFile(request.VideoFile.OpenReadStream(), CoreModuleDirectories.CourseEpisode(request.CourseId, episode.Token), episode.VideoName);
-        if (request.AttachmentFile != null)
+        await localFileService.SaveFile(request.VideoFile, CoreModuleDirectories.CourseEpisode(request.CourseId, episode.Token), episode.VideoName);
+        if (request.AttachmentFile!= null)
         {
             if (request.AttachmentFile.IsValidCompressFile())
             {
-                await ftp.SaveFile(request.AttachmentFile.OpenReadStream(), CoreModuleDirectories.CourseEpisode(request.CourseId, episode.Token), episode.AttachmentName!);
+                await localFileService.SaveFile(request.AttachmentFile, CoreModuleDirectories.CourseEpisode(request.CourseId, episode.Token), episode.AttachmentName!);
             }
         }
     }

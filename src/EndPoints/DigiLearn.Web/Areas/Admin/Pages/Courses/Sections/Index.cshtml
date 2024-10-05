@@ -1,12 +1,12 @@
-﻿@page "{courseId}"
+﻿@page "{courseId}/{handler?}"
 @model DigiLearn.Web.Areas.Admin.Pages.Courses.Sections.IndexModel
 @{
-    ViewData["title"] = "مدیریت سرفصل های دوره";
+    ViewData["title"] = "مدیریت سرفصل های دوره "+@Model.Course.Title;
     ViewData["selected"] = "courses_index";
     var counter = 1;
 }
 
-
+<h2>@ViewData["title"]</h2>
 <div class="collapsible">
     @foreach (var item in Model.Course.Sections)
     {
@@ -37,14 +37,20 @@
                                 <td>
                                     @if (e.IsActive)
                                     {
-                                        <label>فعال</label>
+                                        <label class="badge badge-success">فعال</label>
                                     }
                                     else
                                     {
-                                        <label>غیرفعال</label>
+                                        <label class="badge badge-danger">غیرفعال</label>
                                     }
                                 </td>
-                                <td></td>
+                                <td>
+                                    @if (e.IsActive==false)
+                                    {
+                                        <Question class="btn btn-success btn-sm mb-2" url="@Url.Page("Index","Accept",new{courseId=item.CourseId,episodeId=e.Id})">تایید</Question>
+                                    }
+                                    <delete-item url="@Url.Page("Index","Delete",new{courseId=item.CourseId,episodeId=e.Id})">حذف</delete-item>
+                                </td>
                             </tr>
                             counter += 1;
                         }

@@ -18,7 +18,6 @@
     <Folder Include="Course\Create\" />
     <Folder Include="Course\Edit\" />
     <Folder Include="Course\Episodes\Accept\" />
-    <Folder Include="Course\Episodes\Delete\" />
     <Folder Include="Course\Episodes\Edit\" />
     <Folder Include="Course\Sections\AddSection\" />
     <Folder Include="Course\Sections\EditSection\" />

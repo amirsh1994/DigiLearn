@@ -1,7 +1,9 @@
 ﻿using Common.Application;
 using CoreModule.Application.Course.Create;
 using CoreModule.Application.Course.Edit;
+using CoreModule.Application.Course.Episodes.Accept;
 using CoreModule.Application.Course.Episodes.Add;
+using CoreModule.Application.Course.Episodes.Delete;
 using CoreModule.Application.Course.Sections.AddSection;
 using CoreModule.Query.Course._DTOs;
 using CoreModule.Query.Course.GetByFilter;
@@ -19,6 +21,10 @@ public interface ICourseFacade
     Task<OperationResult> AddSection(AddCourseSectionCommand command);
 
     Task<OperationResult> AddEpisode(AddCourseEpisodeCommand command);
+
+    Task<OperationResult> AcceptEpisode(AcceptCourseEpisodeCommand command);
+
+    Task<OperationResult> DeleteEpisode(DeleteCourseEpisodeCommand command);
 
     Task<CourseFilterResult> GetCourseByFilter(CourseFilterParams filterParams);
 
@@ -44,6 +50,16 @@ public class CourseFacade(IMediator mediator) : ICourseFacade
     }
 
     public async Task<OperationResult> AddEpisode(AddCourseEpisodeCommand command)
+    {
+        return await mediator.Send(command);
+    }
+
+    public async Task<OperationResult> AcceptEpisode(AcceptCourseEpisodeCommand command)
+    {
+        return await mediator.Send(command);
+    }
+
+    public async Task<OperationResult> DeleteEpisode(DeleteCourseEpisodeCommand command)
     {
         return await mediator.Send(command);
     }
