@@ -4,8 +4,10 @@ using CoreModule.Application.Course.Edit;
 using CoreModule.Application.Course.Episodes.Accept;
 using CoreModule.Application.Course.Episodes.Add;
 using CoreModule.Application.Course.Episodes.Delete;
+using CoreModule.Application.Course.Episodes.Edit;
 using CoreModule.Application.Course.Sections.AddSection;
 using CoreModule.Query.Course._DTOs;
+using CoreModule.Query.Course.Episodes.GetById;
 using CoreModule.Query.Course.GetByFilter;
 using CoreModule.Query.Course.GetById;
 using MediatR;
@@ -26,13 +28,17 @@ public interface ICourseFacade
 
     Task<OperationResult> DeleteEpisode(DeleteCourseEpisodeCommand command);
 
+    Task<OperationResult> EditEpisode(EditEpisodeCommand command);
+
     Task<CourseFilterResult> GetCourseByFilter(CourseFilterParams filterParams);
 
     Task<CourseDto?> GetCourseById(Guid courseId);
+
+    Task<EpisodeDto?> GetEpisodeById(Guid episodeId);
 }
 
 
-public class CourseFacade(IMediator mediator) : ICourseFacade
+public class CourseFacade(IMediator mediator):ICourseFacade
 {
     public async Task<OperationResult> Create(CreateCourseCommand command)
     {
@@ -64,6 +70,11 @@ public class CourseFacade(IMediator mediator) : ICourseFacade
         return await mediator.Send(command);
     }
 
+    public async Task<OperationResult> EditEpisode(EditEpisodeCommand command)
+    {
+        return await mediator.Send(command);
+    }
+
     public async Task<CourseFilterResult> GetCourseByFilter(CourseFilterParams filterParams)
     {
         return await mediator.Send(new GetCoursesByFilterQuery(filterParams));
@@ -72,5 +83,10 @@ public class CourseFacade(IMediator mediator) : ICourseFacade
     public async Task<CourseDto?> GetCourseById(Guid courseId)
     {
         return await mediator.Send(new GetCourseByIdQuery(courseId));
+    }
+
+    public async Task<EpisodeDto?> GetEpisodeById(Guid episodeId)
+    {
+        return await mediator.Send(new GetEpisodeByIdQuery(episodeId));
     }
 }

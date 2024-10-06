@@ -173,14 +173,37 @@ public class Course : AggregateRoot
 
     public Episode RemoveEpisode(Guid episodeId)
     {
-        var section = Sections.FirstOrDefault(x => x.Episodes.Any(e =>e.Id == episodeId));
-        if (section==null)
+        var section = Sections.FirstOrDefault(x => x.Episodes.Any(e => e.Id == episodeId));
+        if (section == null)
         {
             throw new InvalidDomainDataException("episode not found for delete");
         }
-        var episode = section.Episodes.First(x=>x.Id==episodeId);
+        var episode = section.Episodes.First(x => x.Id == episodeId);
         section.Episodes.Remove(episode);
         return episode;
+    }
+
+    public void EditEpisode(Guid episodeId, Guid sectionId, string title, bool isActive, TimeSpan timeSpan, string? attachmentName)
+    {
+        var section = Sections.FirstOrDefault(x => x.Id == sectionId);
+        if (section == null)
+            throw new InvalidDomainDataException("sectionIs is not valid....domain Edit Episode");
+
+        var episode = section.Episodes.FirstOrDefault(x => x.Id == episodeId);
+        if (episode == null)
+            throw new InvalidDomainDataException("episodeId is not valid....domain Edit Episode");
+
+
+        episode.Edit(title, isActive, timeSpan, attachmentName);
+    }
+
+    public Episode? GetEpisodeById(Guid sectionId, Guid episodeId)
+    {
+        var section = Sections.FirstOrDefault(x => x.Id == sectionId);
+        if (section == null)
+            return null;
+
+        return section.Episodes.FirstOrDefault(x => x.Id == episodeId);
     }
 }
 
@@ -264,5 +287,17 @@ public class Episode : BaseEntity
     public void ToggleStatus()
     {
         IsActive = !IsActive;
+    }
+
+    public void Edit(string title, bool isActive, TimeSpan timeSpan, string? attachmentName)
+    {
+        NullOrEmptyDomainDataException.CheckString(title, nameof(title));
+        Title = title;
+        IsActive = isActive;
+        TimeSpan = timeSpan;
+        if (string.IsNullOrWhiteSpace(attachmentName) == false)
+        {
+            AttachmentName = attachmentName;
+        }
     }
 }

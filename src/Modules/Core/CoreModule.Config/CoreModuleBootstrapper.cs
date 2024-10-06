@@ -1,6 +1,4 @@
 ﻿using Common.Application;
-using Common.Application.FileUtil.Interfaces;
-using Common.Application.FileUtil.Services;
 using CoreModule.Application.Category;
 using CoreModule.Application.Category.Create;
 using CoreModule.Application.Course;
