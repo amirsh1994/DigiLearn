@@ -1,4 +1,6 @@
-﻿@page
+﻿@page "{episodeId}/{courseId}"
+@using DigiLearn.Web.Infrastructure
+@using CoreModule.Application._Utilities
 @model DigiLearn.Web.Areas.Admin.Pages.Courses.Sections.EditEpisodeModel
 
 @{
@@ -6,14 +8,30 @@
     ViewData["selected"] = "";
 }
 <div class="card">
-    <form  method="post"  class="card-body row">
+    <form method="post" class="card-body row" enctype="multipart/form-data">
         <div class="col-md-6">
+            @Html.EditorFor(x => x.Title)
         </div>
         <div class="col-md-6">
+            @Html.EditorFor(x => x.Time)
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.AttachmentFile)
+        </div>
 
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.VideoFile)
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.IsActive)
+        </div>
+        <div class="col-md-12">
+            <video controls="controls" width="100%">
+                <source src="@CoreModuleDirectories.GetEpisodeFile((Guid)Model.CourseId!,Model.Episode!.Token,Model.VideoFileName!)" type="video/mp4" />
+            </video>
         </div>
         <div class="col-md-12 mt-2 d-flex justify-content-end">
-            <submit/>
+            <submit />
         </div>
     </form>
 </div>

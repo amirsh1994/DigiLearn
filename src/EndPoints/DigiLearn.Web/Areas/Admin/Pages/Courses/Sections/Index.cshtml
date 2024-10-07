@@ -45,11 +45,12 @@
                                     }
                                 </td>
                                 <td>
-                                    @if (e.IsActive==false)
+                                    <a asp-page="EditEpisode" asp-route-episodeId="@e.Id"  asp-route-courseId="@item.CourseId" class="btn btn-primary btn-sm mb-2">ویرایش</a>
+                                    @if (e.IsActive == false)
                                     {
-                                        <Question class="btn btn-success btn-sm mb-2" url="@Url.Page("Index","Accept",new{courseId=item.CourseId,episodeId=e.Id})">تایید</Question>
+                                        <Question class="btn btn-success btn-sm mb-2" url="@Url.Page("Index", "Accept", new { courseId = item.CourseId, episodeId = e.Id })">تایید</Question>
                                     }
-                                    <delete-item url="@Url.Page("Index","Delete",new{courseId=item.CourseId,episodeId=e.Id})">حذف</delete-item>
+                                    <delete-item url="@Url.Page("Index", "Delete", new { courseId = item.CourseId, episodeId = e.Id })">حذف</delete-item>
                                 </td>
                             </tr>
                             counter += 1;
