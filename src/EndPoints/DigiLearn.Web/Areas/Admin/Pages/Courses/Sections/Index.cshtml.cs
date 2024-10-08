@@ -1,10 +1,7 @@
-using Common.Application;
 using CoreModule.Application.Course.Episodes.Accept;
 using CoreModule.Application.Course.Episodes.Delete;
 using CoreModule.Facade.Course;
-using CoreModule.Facade.Teacher;
 using CoreModule.Query.Course._DTOs;
-using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
 

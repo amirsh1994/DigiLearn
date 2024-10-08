@@ -36,11 +36,13 @@ public class EditCourseCommand : IBaseCommand
 
     public CourseStatus CourseStatus { get; set; }
 
+    public CourseActionStatus ActionStatus { get; set; }
+
     public SeoData SeoData { get; set; }
 }
 
 
-public class EditCourseCommandHandler(ICourseRepository repository, IFtpFileService ftp, ILocalFileService localFileService, ICourseDomainService domainService):IBaseCommandHandler<EditCourseCommand>
+public class EditCourseCommandHandler(ICourseRepository repository, ILocalFileService localFileService, ICourseDomainService domainService) : IBaseCommandHandler<EditCourseCommand>
 {
     public async Task<OperationResult> Handle(EditCourseCommand request, CancellationToken cancellationToken)
     {
@@ -55,11 +57,11 @@ public class EditCourseCommandHandler(ICourseRepository repository, IFtpFileServ
         var oldVideoFileName = course.VideoName;
         if (request.VideoFileName != null)
         {
-            if (request.VideoFileName.IsValidMp4File()==false)
+            if (request.VideoFileName.IsValidMp4File() == false)
             {
                 return OperationResult.Error("only mp4 file is accepted for edit ");
             }
-            videoPath = await ftp.SaveFileAndGenerateName(request.VideoFileName, CoreModuleDirectories.CourseDemo(course.Id));
+            videoPath = await localFileService.SaveFileAndGenerateName(request.VideoFileName, CoreModuleDirectories.CourseDemo(course.Id));
         }
 
         if (request.ImageFile != null)
@@ -73,18 +75,18 @@ public class EditCourseCommandHandler(ICourseRepository repository, IFtpFileServ
             (
             request.Title, request.Description, imageName, videoPath, request.Price
             , request.CourseLevel, request.CourseStatus, request.SeoData, request.SubCategoryId
-            , request.SubCategoryId, request.Slug, domainService
+            , request.CategoryId, request.Slug,request.ActionStatus, domainService
             );
         await repository.Save();
-        await DeleteOldFile(oldImageName, oldVideoFileName, request.ImageFile != null, request.VideoFileName != null, course);
+        DeleteOldFile(oldImageName, oldVideoFileName, request.ImageFile != null, request.VideoFileName != null, course);
         return OperationResult.Success();
     }
 
-    private async Task DeleteOldFile(string image, string ? video, bool isUploadImage, bool isUploadVideo, Domain.Courses.Models.Course course)
+    private void DeleteOldFile(string image, string? video, bool isUploadImage, bool isUploadVideo, Domain.Courses.Models.Course course)
     {
-        if (isUploadVideo && string.IsNullOrWhiteSpace(video)==false)
+        if (isUploadVideo && string.IsNullOrWhiteSpace(video) == false)
         {
-            await ftp.DeleteFile(CoreModuleDirectories.CourseDemo(course.Id), video);
+            localFileService.DeleteFile(CoreModuleDirectories.CourseDemo(course.Id), video);
         }
 
         if (isUploadImage)
@@ -112,7 +114,7 @@ public class EditCourseCommandValidator : AbstractValidator<EditCourseCommand>
             .NotNull()
             .NotEmpty();
 
-        RuleFor(x => x.ImageFile)
-            .NotNull();
+        //RuleFor(x => x.ImageFile)
+        //    .NotNull();
     }
 }

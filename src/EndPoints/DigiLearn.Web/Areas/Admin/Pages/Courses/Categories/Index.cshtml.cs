@@ -1,4 +1,3 @@
-using CoreModule.Application.Category.Delete;
 using CoreModule.Facade.Category;
 using CoreModule.Query.Category._DTOs;
 using DigiLearn.Web.Infrastructure.RazorUtils;

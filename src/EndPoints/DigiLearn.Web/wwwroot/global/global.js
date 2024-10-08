@@ -291,6 +291,7 @@ $(document).ready(function () {
     loadDataTable();
     loadSelect2();
     var result = getCookie("SystemAlert");
+    console.log(result);
     if (result) {
         result = JSON.parse(result);
         if (result.Status === 200) {

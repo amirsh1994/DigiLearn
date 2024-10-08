@@ -33,7 +33,7 @@ public class Course : AggregateRoot
 
     public CourseStatus CourseStatus { get; private set; }
 
-    public CourseActionStatus Status { get; set; }
+    public CourseActionStatus Status { get;private set; }
 
     public SeoData SeoData { get; private set; }
 
@@ -68,13 +68,13 @@ public class Course : AggregateRoot
         Status = status;
     }
 
-    public void Edit(string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, CourseStatus courseStatus, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug, ICourseDomainService domainService)
+    public void Edit(string title, string description, string imageName, string? videoName, int price, CourseLevel courseLevel, CourseStatus courseStatus, SeoData seoData, Guid subCategoryId, Guid categoryId, string slug,CourseActionStatus courseAction, ICourseDomainService domainService)
     {
         Guard(title, description, imageName, slug);
-        if (domainService.IsSlugExists(slug))
-        {
-            throw new InvalidDomainDataException("duplicated slug when Edit course");
-        }
+        if (Slug != slug)
+            if (domainService.IsSlugExists(slug))
+                throw new InvalidDomainDataException("duplicated slug when Edit course");
+
         Title = title;
         Description = description;
         ImageName = imageName;
@@ -87,6 +87,7 @@ public class Course : AggregateRoot
         SubCategoryId = subCategoryId;
         CategoryId = categoryId;
         Slug = slug;
+        Status = courseAction;
     }
 
     private void Guard(string title, string description, string imageName, string slug)

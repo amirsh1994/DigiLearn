@@ -1,6 +1,5 @@
 ﻿using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using Common.Domain.Utils;
 using CoreModule.Application.Category.Edit;

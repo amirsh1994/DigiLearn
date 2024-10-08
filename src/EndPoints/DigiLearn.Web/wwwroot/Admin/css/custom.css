@@ -5,3 +5,7 @@
 .text-right {
     text-align: right !important;
 }
+
+.col-md-6,col-md-12 {
+    margin-bottom: .5rem;
+}
