@@ -25,7 +25,6 @@
   <ItemGroup>
     <Folder Include="Infrastructure\Services\" />
     <Folder Include="Pages\Shared\Menu\" />
-    <Folder Include="wwwroot\core\teacher\" />
   </ItemGroup>
 
 </Project>

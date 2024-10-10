@@ -1,0 +1,67 @@
+﻿@page
+@using CoreModule.Domain.Teachers.Enums
+@model DigiLearn.Web.Areas.Admin.Pages.Teachers.IndexModel
+@{
+    ViewData["title"] = "مدیریت مدرسین";
+    ViewData["selected"] = "teachers";
+}
+
+<a asp-page="Add" class="btn btn-success mb-1">افزودن موردجدید</a>
+<div class="card">
+    <div class="table table-responsive card-body p-0 mb-0">
+        <table class="table table-bordered table-hover mb-0 data-table">
+            <thead>
+                <tr>
+                    <th>نام کاربری</th>
+                    <th>نام ونام خانوادگی</th>
+                    <th>شماره تلفن</th>
+                    <th>وضعیت</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Teachers)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.User.Name @item.User.Family</td>
+                        <td>@item.User.PhoneNumber</td>
+                        <td>
+                            @switch (@item.Status)
+                            {
+                                case TeacherStatus.Active:
+                                    <label class="badge badge-success">فعال</label>
+                                    break;
+                                case TeacherStatus.InActive:
+                                    <label class="badge badge-danger">غیرفعال</label>
+                                    break;
+                                case TeacherStatus.Pending:
+                                    <label class="badge badge-info">درحال بررسی</label>
+                                    break;
+
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
+                        </td>
+
+
+                            <td>
+                                @if (item.Status == TeacherStatus.InActive)
+                            {
+                                <Question>فعال سازی</Question>
+                            }
+                            else if (item.Status == TeacherStatus.Active)
+                                {
+                                <Question>غیر فعال سازی</Question>
+                            }
+
+
+                            <a class="btn btn-primary" asp-page="Show" asp-route-teacherId="@item.Id">نمایش</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*<partial name="_Pagination"model="null"/>*@
+</div>

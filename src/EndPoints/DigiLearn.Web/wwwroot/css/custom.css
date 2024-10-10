@@ -1,6 +1,6 @@
 .field-validation-error {
     font-size: 13px;
-    color: red;
+    color: red
 }
 
 .form-element-row {
@@ -8,17 +8,25 @@
 }
 
 .form-element-row label {
-    font-size: 14px;
+    font-size: 14px
 }
 
 .input-validation-error {
-    border-color: red;
+    border-color: red
 }
 
 .col-md-6 {
-    margin-top:1rem
+    margin-top: 1rem
 }
 
 .col-md-12 {
-    margin-top:1rem
+    margin-top: 1rem
+}
+
+button.section-title {
+    font-size: 16px !important;
+}
+
+img {
+    object-fit: cover;
 }

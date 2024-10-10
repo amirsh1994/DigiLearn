@@ -11,7 +11,7 @@ namespace DigiLearn.Web.Pages.Profile.Teacher.Courses.Sections.Episodes;
 
 [ServiceFilter(typeof(TeacherActionFilter))]
 [BindProperties]
-public class AddModel(ICourseFacade courseFacade) : BaseRazor
+public class AddModel(ICourseFacade courseFacade):BaseRazor
 {
 
     [Display(Name = "عنوان")]

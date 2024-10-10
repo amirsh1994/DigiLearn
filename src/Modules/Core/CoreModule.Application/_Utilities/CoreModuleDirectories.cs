@@ -12,8 +12,9 @@ public class CoreModuleDirectories
 
     public static string GetCourseImage(string imageName)=>$"{CourseImage.Replace("wwwroot","")}/{imageName}";
 
-
     public static string GetEpisodeFile(Guid courseId, Guid episodeToken,string fileName) => $"{CourseEpisode(courseId,episodeToken).Replace("wwwroot","")}/{fileName}";
+
+    public static string GetCvFile(string fileName) => $"{CvFileName.Replace("wwwroot","")}/{fileName}";
 
 
 }

@@ -1,0 +1,46 @@
+﻿@page "{teacherId}"
+@using UserModule.Core
+@using CoreModule.Application._Utilities
+@using Common.Application.DateUtil
+@using CoreModule.Domain.Teachers.Enums
+@model DigiLearn.Web.Areas.Admin.Pages.Teachers.ShowModel
+@{
+    ViewData["title"] = "مدیزیت اطلاعات مدرس";
+    ViewData["selected"] = "teachers";
+}
+
+<h2>اطلاعات مدرس</h2>
+
+<div class="card card-body mt-1">
+    <img src="@UserModuleDirectories.GetUserAvatar(Model.Teacher.User.Avatar)" style="max-width: 150px" class="mb-2" />
+    <div class="row">
+        <div class="col-md-6">نام کاربری : @Model.Teacher.UserName</div>
+        <div class="col-md-6">نام و نام خانوادگی : @Model.Teacher.User.Name @Model.Teacher.User.Family</div>
+
+        <div class="col-md-6">شماره تلفن : @Model.Teacher.User.PhoneNumber</div>
+
+        <div class="col-md-6">ایمیل : @Model.Teacher.User.Email</div>
+
+        <div class="col-md-6">تاریخ ثبت نام : @Model.Teacher.CreationDate.ToPersianDateTime()</div>
+
+        <div class="col-md-6">
+            وضعیت :
+            @switch (Model.Teacher.Status)
+            {
+                case TeacherStatus.Active:
+                    <label class="badge bg-success">فعال</label>
+                    break;
+                case TeacherStatus.InActive:
+                    <label class="badge bg-danger">غیرفعال</label>
+
+                    break;
+
+                case TeacherStatus.Pending:
+                    <label class="badge bg-primary">درحال برسی</label>
+
+                    break;
+            }
+        </div>
+        <div class="col-md-12">رزومه : <a href="@CoreModuleDirectories.GetCvFile(Model.Teacher.CvFileName)" target="_blank">نمایش</a></div>
+    </div>
+</div>
