@@ -2,6 +2,7 @@
 using CoreModule.Application.Teacher.AcceptRequest;
 using CoreModule.Application.Teacher.Register;
 using CoreModule.Application.Teacher.RejectRequest;
+using CoreModule.Application.Teacher.ToggleStatus;
 using CoreModule.Query.Teacher._DTOs;
 using CoreModule.Query.Teacher.GetById;
 using CoreModule.Query.Teacher.GetByUserId;
@@ -17,6 +18,8 @@ public interface ITeacherFacade
     Task<OperationResult> AcceptRequest(AcceptTeacherRequestCommand command);
 
     Task<OperationResult> RejectRequest(RejectTeacherRequestCommand command);
+
+    Task<OperationResult> ToggleStatus(ToggleTeacherStatusCommand command);
 
     Task<TeacherDto?> GetTeacherById(Guid id);
 
@@ -40,6 +43,11 @@ public class TeacherFacade(IMediator mediator) : ITeacherFacade
     }
 
     public async Task<OperationResult> RejectRequest(RejectTeacherRequestCommand command)
+    {
+        return await mediator.Send(command);
+    }
+
+    public async Task<OperationResult> ToggleStatus(ToggleTeacherStatusCommand command)
     {
         return await mediator.Send(command);
     }

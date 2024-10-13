@@ -16,7 +16,7 @@ function changePageId(pageId) {
     var search_params = url.searchParams;
 
     // Change PageId
-    search_params.set('pageId', pageId);
+    search_params.set('filterParams.pageId', pageId);
     url.search = search_params.toString();
 
     // the new url string

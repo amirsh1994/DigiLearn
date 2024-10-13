@@ -97,7 +97,18 @@ internal class TicketService(TicketContext db, IMapper mapper) : ITicketService
             result = result.Where(x => x.UserId == filterParams.UserId);
         }
 
+        if (string.IsNullOrWhiteSpace(filterParams.Title)==false)
+        {
+            result = result.Where(x => x.Title.Contains(filterParams.Title));
+        }
+
+        if (filterParams.TicketStatus!=null)
+        {
+            result = result.Where(x => x.TicketStatus == filterParams.TicketStatus);
+        }
+
         var skip = (filterParams.PageId - 1) * filterParams.Take;
+
         var data = new TicketFilterResult
         {
             Data =await result.Skip(skip).Take(filterParams.Take).Select(x=> new TicketFilterData
@@ -106,7 +117,8 @@ internal class TicketService(TicketContext db, IMapper mapper) : ITicketService
                 UserId = x.UserId,
                 Title = x.Title,
                 CreationDate =x.CreationDate,
-                Status = x.TicketStatus
+                Status = x.TicketStatus,
+                OwnerFullName = x.OwnerFullName
             }).ToListAsync()
         };
         data.GeneratePaging(result,filterParams.Take,filterParams.PageId);

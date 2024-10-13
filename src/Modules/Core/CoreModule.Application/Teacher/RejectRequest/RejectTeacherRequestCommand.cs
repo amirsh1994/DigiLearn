@@ -1,5 +1,7 @@
 ﻿using Common.Application;
+using CoreModule.Domain.Teachers.Events;
 using CoreModule.Domain.Teachers.Repository;
+using MediatR;
 
 namespace CoreModule.Application.Teacher.RejectRequest;
 
@@ -12,7 +14,7 @@ public class RejectTeacherRequestCommand : IBaseCommand
 }
 
 
-public class RejectTeacherRequestCommandHandler(ITeacherRepository repository) : IBaseCommandHandler<RejectTeacherRequestCommand>
+public class RejectTeacherRequestCommandHandler(ITeacherRepository repository,IMediator mediator) : IBaseCommandHandler<RejectTeacherRequestCommand>
 {
     public async Task<OperationResult> Handle(RejectTeacherRequestCommand request, CancellationToken cancellationToken)
     {
@@ -24,6 +26,7 @@ public class RejectTeacherRequestCommandHandler(ITeacherRepository repository) :
         repository.Delete(teacher);
         //Todo Send Event
         await repository.Save();
+        await mediator.Publish(new RejectRequestDomainEvent() { UserId = teacher.UserId, Description = request.Description }, cancellationToken);
         return OperationResult.Success();
     }
 }

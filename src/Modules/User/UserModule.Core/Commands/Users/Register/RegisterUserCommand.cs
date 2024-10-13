@@ -14,8 +14,6 @@ public class RegisterUserCommand : IBaseCommand<Guid>
 
     public string Password { get; set; }
 
-
-
 }
 
 

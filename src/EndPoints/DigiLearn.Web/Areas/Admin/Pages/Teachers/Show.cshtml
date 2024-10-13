@@ -1,4 +1,4 @@
-﻿@page "{teacherId}"
+﻿@page "{teacherId}/{handler?}"
 @using UserModule.Core
 @using CoreModule.Application._Utilities
 @using Common.Application.DateUtil
@@ -10,6 +10,11 @@
 }
 
 <h2>اطلاعات مدرس</h2>
+@if (Model.Teacher.Status == TeacherStatus.Pending)
+{
+    <Question class="btn btn-success" url="@Url.Page("show","Accept",new{teacherId=Model.Teacher.Id})">تایید درخواست</Question>
+}
+
 
 <div class="card card-body mt-1">
     <img src="@UserModuleDirectories.GetUserAvatar(Model.Teacher.User.Avatar)" style="max-width: 150px" class="mb-2" />
@@ -44,3 +49,14 @@
         <div class="col-md-12">رزومه : <a href="@CoreModuleDirectories.GetCvFile(Model.Teacher.CvFileName)" target="_blank">نمایش</a></div>
     </div>
 </div>
+
+@if (Model.Teacher.Status == TeacherStatus.Pending)
+{
+    <div class="card card-body mt-2">
+        <form method="post" asp-page-handler="Reject">
+            <textarea class="form-control" placeholder="دلیل رد درخواست"></textarea>
+            <button class="btn btn-danger mt-1" onclick="return confirm('ایا از انجام عملیات اطمینان دارید؟')">رددرخواست</button>
+        </form>
+    </div>
+}
+   

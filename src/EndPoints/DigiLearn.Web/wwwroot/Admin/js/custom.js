@@ -40,7 +40,7 @@ function AddRow() {
 function changePageId(pageId) {
     var url = new URL(window.location.href);
     var search_params = url.searchParams;
-    search_params.set('filterParam.pageId', pageId);
+    search_params.set('filterParams.pageId', pageId);
     url.search = search_params.toString();
     var new_url = url.toString();
     window.location.replace(new_url);

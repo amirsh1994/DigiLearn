@@ -17,35 +17,22 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            @*<li class=" nav-item">
-            <a href="../../html/vertical-menu-template-semi-dark/index.html"><i class="menu-livicon" data-icon="desktop"></i><span class="menu-title" data-i18n="Dashboard">داشبورد</span><span class="badge bg-rgba-danger text-danger badge-pill badge-round float-right mr-2">2</span></a>
-            <ul class="menu-content">
-                <li class="active">
-                    <a href="dashboard-ecommerce.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="eCommerce">تجارت الکترونیک</span></a>
-                </li>
-                <li>
-                    <a href="dashboard-analytics.html"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Analytics">آمار تحلیلی</span></a>
-                </li>
-            </ul>
-        </li>*@
-
             <li class=" nav-item @(selected=="index"?"active":null)">
                 <a href="/Admin">
                     <i class="menu-livicon" data-icon="desktop"></i>
                     <span class="menu-title" data-i18n="File Manager"> داشبورد</span>
                 </a>
             </li>
-
-            <li class=" nav-item @(selected=="banners"?"active":null)">
+            @*<li class=" nav-item @(selected=="banners"?"active":null)">
                 <a href="/Admin/banners">
                     <i class="menu-livicon" data-icon="box"></i>
                     <span class="menu-title" data-i18n="File Manager"> مدیریت بنرها</span>
                 </a>
-            </li>
-            <li class=" nav-item @(selected=="orders"?"active":null)">
-                <a href="/Admin/orders">
+            </li>*@
+            <li class=" nav-item @(selected=="tickets"?"active":null)">
+                <a href="/Admin/tickets">
                     <i class="menu-livicon" data-icon="box"></i>
-                    <span class="menu-title" data-i18n="File Manager"> مدیریت سفارشات</span>
+                    <span class="menu-title" data-i18n="File Manager">مدیریت تیکت ها</span>
                 </a>
             </li>
             
