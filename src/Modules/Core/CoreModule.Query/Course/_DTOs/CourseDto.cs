@@ -84,8 +84,6 @@ public class CourseDto:BaseDto
             default:
                 return "";
         }
-
-        return "";
     }
     public string GetCourseLevel()
     {
@@ -100,8 +98,6 @@ public class CourseDto:BaseDto
             default:
                 return "";
         }
-
-        return "";
     }
 }
 

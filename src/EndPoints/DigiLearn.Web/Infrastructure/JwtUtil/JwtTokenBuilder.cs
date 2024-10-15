@@ -26,8 +26,6 @@ public class JwtTokenBuilder
             expires: DateTime.Now.AddDays(30),
             signingCredentials:credentials
             );
-
-
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 } 

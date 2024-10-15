@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreModule.Facade", "src\Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreModule.Config", "src\Modules\Core\CoreModule.Config\CoreModule.Config.csproj", "{868A47EB-78D9-4F48-B85C-4C38A1DA0171}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.EventBus", "src\Common\Common.EventBus\Common.EventBus.csproj", "{029DFCD4-69C2-4DA5-BAEE-C7DE08513274}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{868A47EB-78D9-4F48-B85C-4C38A1DA0171}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{868A47EB-78D9-4F48-B85C-4C38A1DA0171}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{868A47EB-78D9-4F48-B85C-4C38A1DA0171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{029DFCD4-69C2-4DA5-BAEE-C7DE08513274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{029DFCD4-69C2-4DA5-BAEE-C7DE08513274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{029DFCD4-69C2-4DA5-BAEE-C7DE08513274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{029DFCD4-69C2-4DA5-BAEE-C7DE08513274}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +148,7 @@ Global
 		{75DABB78-1B1D-4730-A232-C35A20692021} = {1BD2C76D-128E-4BA1-AA0A-8FA3F7B8CF60}
 		{9FC8484B-4BF6-4556-8C06-CA5B9A491AD4} = {1BD2C76D-128E-4BA1-AA0A-8FA3F7B8CF60}
 		{868A47EB-78D9-4F48-B85C-4C38A1DA0171} = {1BD2C76D-128E-4BA1-AA0A-8FA3F7B8CF60}
+		{029DFCD4-69C2-4DA5-BAEE-C7DE08513274} = {1543B1B5-547D-4872-95E5-C90632821EEA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DD98803-2A5E-41F0-90FB-A6CB058AEB6A}

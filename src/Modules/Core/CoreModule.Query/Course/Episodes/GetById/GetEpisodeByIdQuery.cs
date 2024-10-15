@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreModule.Query.Course.Episodes.GetById;
 
-public record GetEpisodeByIdQuery(Guid EpisodeId) : IBaseQuery<EpisodeDto?>;
+public record GetEpisodeByIdQuery(Guid EpisodeId):IBaseQuery<EpisodeDto?>;
 
 
 

@@ -1,5 +1,7 @@
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
+using Common.EventBus.Abstractions;
+using Common.EventBus.RabbitMQ;
 using CoreModule.Config;
 using CoreModule.Infrastructure.Migrations;
 using DigiLearn.Web.Infrastructure;
@@ -21,7 +23,8 @@ public class Program
         builder.Services
             .InitUserModule(builder.Configuration)
             .InitTicketModule(builder.Configuration)
-            .InitCoreModule(builder.Configuration);
+            .InitCoreModule(builder.Configuration)
+            .RegisterWebDependencies();
         builder.Services.AddScoped<ILocalFileService, LocalFileService>();
         builder.Services.AddScoped<IFtpFileService, FtpFileService>();
         builder.Services.AddTransient<TeacherActionFilter>();
