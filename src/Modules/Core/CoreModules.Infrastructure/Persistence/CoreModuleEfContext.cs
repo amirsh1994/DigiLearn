@@ -16,7 +16,7 @@ public class CoreModuleEfContext(DbContextOptions<CoreModuleEfContext> options, 
 
     public DbSet<CourseCategory> Categories { get; set; }
 
-    private DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

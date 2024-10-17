@@ -1,8 +1,11 @@
 ﻿using System.Security.Cryptography;
 using Common.Application;
 using Common.Application.SecurityUtil;
+using Common.EventBus.Abstractions;
+using Common.EventBus.Events;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using UserModule.Data;
 using UserModule.Data.Entities.Users;
 
@@ -17,7 +20,7 @@ public class RegisterUserCommand : IBaseCommand<Guid>
 }
 
 
-internal class RegisterUserCommandHandler(UserContext db) : IBaseCommandHandler<RegisterUserCommand, Guid>
+internal class RegisterUserCommandHandler(UserContext db,IEventBus eventBus) : IBaseCommandHandler<RegisterUserCommand, Guid>
 {
 
     public async Task<OperationResult<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -39,6 +42,16 @@ internal class RegisterUserCommandHandler(UserContext db) : IBaseCommandHandler<
         };
         db.Users.Add(user);
         await db.SaveChangesAsync(cancellationToken);
+        eventBus.Publish(new UserRegistered
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Family = user.Family,
+            PhoneNumber = user.phoneNumber,
+            Email = user.Email,
+            Password = user.password,
+            Avatar = user.Avatar
+        },null,Exchanges.UserTopicExchange,ExchangeType.Topic,"user.registered");
         return OperationResult<Guid>.Success(user.Id);
     }
 }

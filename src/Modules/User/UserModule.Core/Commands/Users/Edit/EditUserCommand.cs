@@ -1,6 +1,9 @@
 ﻿using Common.Application;
+using Common.EventBus.Abstractions;
+using Common.EventBus.Events;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using UserModule.Data;
 
 namespace UserModule.Core.Commands.Users.Edit;
@@ -17,7 +20,7 @@ public class EditUserCommand : IBaseCommand
 }
 
 
-public class EditUserCommandHandler(UserContext db):IBaseCommandHandler<EditUserCommand>
+public class EditUserCommandHandler(UserContext db,IEventBus eventBus):IBaseCommandHandler<EditUserCommand>
 {
     public async Task<OperationResult> Handle(EditUserCommand request, CancellationToken cancellationToken)
     {
@@ -34,6 +37,14 @@ public class EditUserCommandHandler(UserContext db):IBaseCommandHandler<EditUser
         }
         db.Update(user);
         await db.SaveChangesAsync(cancellationToken);
+        eventBus.Publish(new UserEdited
+        {
+            UserId = user.Id,
+            Name = user.Name,
+            Family = user.Family,
+            Email = user.Email,
+            PhoneNumber = user.phoneNumber
+        },null,Exchanges.UserTopicExchange,ExchangeType.Topic,"user.edited");
         return OperationResult.Success();
     }
 }

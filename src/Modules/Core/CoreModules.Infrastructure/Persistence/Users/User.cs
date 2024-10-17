@@ -3,17 +3,17 @@ using Common.Domain;
 
 namespace CoreModule.Infrastructure.Persistence.Users;
 
-internal class User : BaseEntity
+public class User : BaseEntity
 {
     [MaxLength(50)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
     [MaxLength(50)]
-    public string Family { get; set; }
+    public string? Family { get; set; }
     [MaxLength(110)]
     public string? Email { get; set; }
 
     [MaxLength(12)]
     public string phoneNumber { get; set; }
     [MaxLength(110)]
-    public string Avatar { get; set; }
+    public string? Avatar { get; set; }
 }

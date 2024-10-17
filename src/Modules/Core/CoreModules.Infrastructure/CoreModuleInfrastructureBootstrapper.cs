@@ -2,6 +2,7 @@
 using CoreModule.Domain.Courses.Repository;
 using CoreModule.Domain.Teachers.DomainServices;
 using CoreModule.Domain.Teachers.Repository;
+using CoreModule.Infrastructure.EventHandlers;
 using CoreModule.Infrastructure.Persistence;
 using CoreModule.Infrastructure.Persistence.Category;
 using CoreModule.Infrastructure.Persistence.Course;
@@ -23,5 +24,6 @@ public static class CoreModuleInfrastructureBootstrapper
         service.AddScoped<ICourseRepository, CourseRepository>();
         service.AddScoped<ITeacherRepository, TeacherRepository>();
         service.AddScoped<ICourseCategoryRepository,CourseCategoryRepository>();
+        service.AddHostedService<UserRegisteredEventHandler>();
     }
 }
