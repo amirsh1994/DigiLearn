@@ -2,7 +2,6 @@
 using CoreModule.Domain.Courses.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Drawing.Imaging;
 
 namespace CoreModule.Infrastructure.Persistence.Course;
 

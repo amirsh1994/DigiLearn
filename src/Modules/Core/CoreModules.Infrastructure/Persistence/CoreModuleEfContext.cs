@@ -1,7 +1,5 @@
 ﻿using Common.Infrastructure;
 using CoreModule.Domain.Categories.Models;
-using CoreModule.Domain.Courses.Models;
-using CoreModule.Domain.Teachers.Models;
 using CoreModule.Infrastructure.Persistence.Users;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

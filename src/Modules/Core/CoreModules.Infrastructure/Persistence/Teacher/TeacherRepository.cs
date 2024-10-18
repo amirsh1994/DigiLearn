@@ -1,5 +1,4 @@
-﻿using Common.Domain.Repository;
-using Common.Infrastructure.Repository;
+﻿using Common.Infrastructure.Repository;
 using CoreModule.Domain.Teachers.Repository;
 
 namespace CoreModule.Infrastructure.Persistence.Teacher;
