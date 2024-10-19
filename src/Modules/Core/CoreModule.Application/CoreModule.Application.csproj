@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
     <ProjectReference Include="..\..\..\Common\Common.Domain\Common.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.EventBus\Common.EventBus.csproj" />
     <ProjectReference Include="..\CoreModule.Domain\CoreModule.Domain.csproj" />
     <ProjectReference Include="..\CoreModules.Infrastructure\CoreModule.Infrastructure.csproj" />
   </ItemGroup>
@@ -23,6 +24,7 @@
     <Folder Include="Course\Sections\EditSection\" />
     <Folder Include="Course\Sections\DeleteSection\" />
     <Folder Include="Course\Sections\" />
+    <Folder Include="Teacher\_EventHandler\" />
     <Folder Include="_Utilities\" />
     <Folder Include="Teacher\RejectRequest\" />
   </ItemGroup>
