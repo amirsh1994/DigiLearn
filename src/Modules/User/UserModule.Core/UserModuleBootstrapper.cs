@@ -1,11 +1,11 @@
-﻿using AngleSharp.Dom;
-using Common.Application;
+﻿using Common.Application;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserModule.Core.Commands.Users.Register;
+using UserModule.Core.EventHandlers;
 using UserModule.Core.Services;
 using UserModule.Data;
 
@@ -30,6 +30,8 @@ public static class UserModuleBootstrapper
         service.AddMediatR(typeof(UserModuleBootstrapper).Assembly);
 
         service.RegisterCommonApplication();
+
+        service.AddHostedService<NotificationEventHandler>();
         return service;
     }
 }

@@ -14,7 +14,7 @@ public class AcceptRequestEventHandler(IEventBus eventBus):INotificationHandler<
        {
            UserId = notification.UserId,
            Title = "تایید درخواست",
-           Message = "تبریک پنل مدرسی شما  در این لینک در دسترس هست :<hr/><a href='/profile/teachers/courses'>ورود</a>",
+           Message = $"تبریک ! ، پنل مدرسی شما  در این لینک در دسترس است <hr/><a href='/profile/Teacher/Courses'>ورود</a>",
            CreationDate = notification.CreationDate
        },"",Exchanges.NotificationExchange,ExchangeType.Fanout);
        return Task.CompletedTask;
@@ -30,7 +30,7 @@ public class RejectRequestEventHandler(IEventBus eventBus):INotificationHandler<
         {
             UserId = notification.UserId,
             Title = "رد درخواست مدرسی",
-            Message = $"کاربر گرامی درخواست مدرسی شما به دلیل زیر رد شد :<hr/><a>${notification.Description}<a/>",
+            Message = $"کاربر گرامی درخواست مدرسی شما به دلیل زیر رد شد : <hr/><p>{notification.Description}</p>",
             CreationDate = notification.CreationDate
         },"",Exchanges.NotificationExchange,ExchangeType.Fanout);
         return Task.CompletedTask;

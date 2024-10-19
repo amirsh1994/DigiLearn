@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Common.Application;
+﻿using Common.Application;
 using Common.Application.SecurityUtil;
 using Common.EventBus.Abstractions;
 using Common.EventBus.Events;
