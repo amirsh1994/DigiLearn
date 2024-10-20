@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreModule.Query.Course.GetByFilter;
 
-public class GetCoursesByFilterQuery(CourseFilterParams filterParams):BaseQueryFilter<CourseFilterResult, CourseFilterParams>(filterParams)
+public class GetCoursesByFilterQuery(CourseFilterParams filterParams) : BaseQueryFilter<CourseFilterResult, CourseFilterParams>(filterParams)
 {
 
 }
@@ -16,26 +16,40 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
         var @params = request.FilterParams;
 
         var q = db.Courses
-            .Include(x=>x.Sections)
-            .ThenInclude(x=>x.Episodes)
-            .AsSplitQuery()
-            .OrderByDescending(x=>x.LastUpdate).AsQueryable();
+            .Include(x=>x.Teacher.User)
+            .Include(x => x.Sections)
+            .ThenInclude(x => x.Episodes)
+            .AsQueryable();
 
-        if (@params.TeacherId!=null)
+        q = @params.CourseFilterSort switch
+        {
+            CourseFilterSort.Latest => q.OrderByDescending(x => x.LastUpdate),
+            CourseFilterSort.Oldest => q.OrderBy(x => x.LastUpdate),
+            CourseFilterSort.Expensive => q.OrderByDescending(x => x.Price),
+            CourseFilterSort.Cheapest => q.OrderBy(x => x.Price),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+
+        if (@params.TeacherId != null)
         {
             q = q.Where(x => x.TeacherId == @params.TeacherId);
         }
 
-        if (@params.ActionStatus!=null)
+
+        if (@params.ActionStatus != null)
         {
             q = q.Where(x => x.Status == @params.ActionStatus);
         }
-        var skip = (@params.PageId - 1)*@params.Take;
+
+
+
+        var skip = (@params.PageId - 1) * @params.Take;
         var take = @params.Take;
         var data = await q.Skip(skip).Take(take).ToListAsync(cancellationToken);
         var model = new CourseFilterResult()
         {
-            Data =data.Select(x=>new CourseFilterData
+            Data = data.Select(x => new CourseFilterData
             {
                 Id = x.Id,
                 CourseStatus = x.Status,
@@ -43,11 +57,12 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
                 ImageName = x.ImageName,
                 Title = x.Title,
                 Slug = x.Slug,
+                TeacherName =$"{x.Teacher.User.Name} {x.Teacher.User.Family}"  ,
                 Price = x.Price,
-                EpisodeCount=x.Sections.Sum(e=>e.Episodes.Count())
+                EpisodeCount = x.Sections.Sum(e => e.Episodes.Count())
             }).ToList()
         };
-        model.GeneratePaging(q,take,@params.PageId);
+        model.GeneratePaging(q, take, @params.PageId);
         return model;
     }
 }

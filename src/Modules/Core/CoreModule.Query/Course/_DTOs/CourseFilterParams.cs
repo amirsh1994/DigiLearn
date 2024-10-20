@@ -10,6 +10,9 @@ public class CourseFilterParams:BaseFilterParam
 
     public CourseActionStatus ? ActionStatus { get; set; }
 
+    public CourseFilterSort CourseFilterSort { get; set; } = CourseFilterSort.Latest;
+
+
 }
 public class CourseFilterData:BaseDto
 {
@@ -19,11 +22,21 @@ public class CourseFilterData:BaseDto
 
     public string Slug { get; set; }
 
+    public string TeacherName { get; set; }
+
     public int Price { get; set; }
 
     public int EpisodeCount { get; set; }
 
     public CourseActionStatus CourseStatus { get; set; }
+}
+
+public enum CourseFilterSort
+{
+    Latest,
+    Oldest,
+    Expensive,
+    Cheapest
 }
 
 

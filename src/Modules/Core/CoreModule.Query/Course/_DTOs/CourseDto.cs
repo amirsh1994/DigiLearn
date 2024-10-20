@@ -73,31 +73,23 @@ public class CourseDto:BaseDto
     }
     public string GetCourseStatus()
     {
-        switch (CourseStatus)
+        return CourseStatus switch
         {
-            case CourseStatus.StartSoon:
-                return "شروع به زودی";
-            case CourseStatus.Completed:
-                return "به اتمام رسیده";
-            case CourseStatus.InProgress:
-                return "درحال برگزاری";
-            default:
-                return "";
-        }
+            CourseStatus.StartSoon => "شروع به زودی",
+            CourseStatus.Completed => "به اتمام رسیده",
+            CourseStatus.InProgress => "درحال برگزاری",
+            _ => ""
+        };
     }
     public string GetCourseLevel()
     {
-        switch (CourseLevel)
+        return CourseLevel switch
         {
-            case CourseLevel.Beginner:
-                return "مقدماتی";
-            case CourseLevel.Expert:
-                return "پیشرفته";
-            case CourseLevel.Intermediate:
-                return "از مقدماتی تا پیشرفته";
-            default:
-                return "";
-        }
+            CourseLevel.Beginner => "مقدماتی",
+            CourseLevel.Expert => "پیشرفته",
+            CourseLevel.Intermediate => "از مقدماتی تا پیشرفته",
+            _ => ""
+        };
     }
 }
 
