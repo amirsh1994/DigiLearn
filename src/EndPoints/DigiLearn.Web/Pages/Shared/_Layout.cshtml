@@ -1,4 +1,5 @@
-﻿
+﻿@using CoreModule.Facade.Category
+
 
 
 <html lang="en">
@@ -16,17 +17,20 @@
     <link rel="stylesheet" href="/css/custom.css">
     @await RenderSectionAsync("meta", false)
 </head>
-
+@inject ICourseCategoryFacade CategoryFacade
+@{
+    var cats = await CategoryFacade.GetMainCategories();
+}
 <body>
     <div class="overlay"></div>
-    <partial name="Header/_MobileMenu" />
+    <partial name="Header/_MobileMenu"/>
 
     <header>
         <partial name="Header/_TopNav" />
 
         @await RenderSectionAsync("middle_header", required: false)
 
-        <partial name="Header/_MainMenu" />
+        <partial name="Header/_MainMenu"model="cats" />
     </header>
     @RenderBody()
     <partial name="_Footer" />

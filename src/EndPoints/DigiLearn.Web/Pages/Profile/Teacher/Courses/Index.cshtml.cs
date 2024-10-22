@@ -5,7 +5,6 @@ using CoreModule.Query.Teacher._DTOs;
 using DigiLearn.Web.Infrastructure;
 using DigiLearn.Web.Infrastructure.RazorUtils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DigiLearn.Web.Pages.Profile.Teacher.Courses;
 

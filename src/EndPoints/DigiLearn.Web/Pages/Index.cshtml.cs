@@ -1,9 +1,5 @@
-using Common.EventBus.Abstractions;
-using Common.EventBus.Events;
 using DigiLearn.Web.Infrastructure.Services;
 using DigiLearn.Web.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DigiLearn.Web.Pages;

@@ -59,7 +59,28 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
                 Slug = x.Slug,
                 TeacherName =$"{x.Teacher.User.Name} {x.Teacher.User.Family}"  ,
                 Price = x.Price,
-                EpisodeCount = x.Sections.Sum(e => e.Episodes.Count())
+                Sections = x.Sections.Select(s=>new CourseSectionDto
+                {
+                    Id = s.Id,
+                    CreationDate = s.CreationDate,
+                    CourseId = s.CourseId,
+                    Title = s.Title,
+                    DisplayOrder = s.DisplayOrder,
+                    Episodes = s.Episodes.Select(e=>new EpisodeDto
+                    {
+                        Id = e.Id,
+                        CreationDate = e.CreationDate,
+                        SectionId = e.SectionId,
+                        Title = e.Title,
+                        EnglishTitle = e.EnglishTitle,
+                        Token = e.Token,
+                        TimeSpan = e.TimeSpan,
+                        VideoName = e.VideoName,
+                        AttachmentName = e.AttachmentName,
+                        IsActive = e.IsActive,
+                        IsFree = e.IsActive
+                    }).ToList()
+                }).ToList()
             }).ToList()
         };
         model.GeneratePaging(q, take, @params.PageId);

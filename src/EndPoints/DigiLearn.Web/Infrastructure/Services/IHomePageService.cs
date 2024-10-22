@@ -33,7 +33,7 @@ public class HomePageService(ICourseFacade courseFacade):IHomePageService
                 ImageName = x.ImageName,
                 Price = x.Price,
                 VisitCount = 0,
-                Duration = "",
+                Duration = x.GetDuration(),
                 CommentCount = 0,
                 TeacherName = x.TeacherName,
             }).ToList()
