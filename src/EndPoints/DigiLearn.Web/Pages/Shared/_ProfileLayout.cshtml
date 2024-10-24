@@ -1,4 +1,6 @@
-﻿<html lang="en">
+﻿@using CoreModule.Facade.Category
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -14,13 +16,17 @@
     <link rel="stylesheet" href="/css/profile.min.css">
     @await RenderSectionAsync("meta", false)
 </head>
+@inject ICourseCategoryFacade CategoryFacade
+@{
+    var cats = await CategoryFacade.GetMainCategories();
+}
 
 <body>
     <div class="overlay"></div>
     <partial name="Header/_MobileMenu" />
     <header>
         <partial name="Header/_TopNav" />
-        <partial name="Header/_MainMenu" />
+        <partial name="Header/_MainMenu" model="cats" />
     </header>
     <main class="mb-4">
         <div class="container-fluid">
@@ -39,14 +45,14 @@
                         <li>
                             <a href="/profile" class="@(isIndexPage?"current":null)">
                                 پنل کاربری
-                                @if (isIndexPage==false)
+                                @if (isIndexPage == false)
                                 {
                                     <i class="fa fa-chevron-left"></i>
                                 }
-                               
+
                             </a>
                         </li>
-                        @if (isIndexPage==false)
+                        @if (isIndexPage == false)
                         {
                             <li>
                                 <a class="current">
@@ -58,7 +64,7 @@
                 </div>
                 <partial name="Shared/_ProfileSideBar" />
                 <div class="col-12 col-xl-9 col-lg-9 col-md-8 profile-body">
-                  @RenderBody()
+                    @RenderBody()
                 </div>
             </div>
         </div>

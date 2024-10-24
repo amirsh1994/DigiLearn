@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreModule.Facade", "src\Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreModule.Config", "src\Modules\Core\CoreModule.Config\CoreModule.Config.csproj", "{868A47EB-78D9-4F48-B85C-4C38A1DA0171}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.EventBus", "src\Common\Common.EventBus\Common.EventBus.csproj", "{029DFCD4-69C2-4DA5-BAEE-C7DE08513274}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.EventBus", "src\Common\Common.EventBus\Common.EventBus.csproj", "{029DFCD4-69C2-4DA5-BAEE-C7DE08513274}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

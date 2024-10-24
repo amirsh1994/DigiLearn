@@ -6,7 +6,7 @@
         {
             var hasChild = item.Children.Any();
             <li class="menu">
-                <a href="/categories?category=@item.Slug">
+                <a href="/courses?category=@item.Slug">
                   @item.Title
                     @if (hasChild)
                     {
@@ -19,61 +19,12 @@
                        @foreach (var child in item.Children)
                        {
                            <li>
-                               <a href="/categories?category=@item.Slug">@child.Title</a>
+                               <a href="/courses?category=@item.Slug">@child.Title</a>
                            </li>
                        }
                     </ul>
                 }
             </li>
         }
-        @*<li class="menu">
-            <a href="#">
-                طراحی سایت
-                <i class="zmdi zmdi-chevron-down"></i>
-            </a>
-            <ul class="category">
-                <li>
-                    <a href="#d">
-                        Html
-                        <i class="zmdi zmdi-chevron-left pull-left"></i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="#">سلام</a>
-                        </li>
-                        <li>
-                            <a href="#">سلام</a>
-                        </li>
-                        <li>
-                            <a href="#">سلام</a>
-                        </li>
-                        <li>
-                            <a href="#">سلام</a>
-                        </li>
-                        <li>
-                            <a href="#">سلام</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Css</a>
-                </li>
-                <li>
-                    <a href="#">React</a>
-                </li>
-                <li>
-                    <a href="#">Java Script</a>
-                </li>
-                <li>
-                    <a href="#">Type Script</a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu">
-            <a href="#">
-                برنامه نویسی وب
-                <i class="zmdi zmdi-chevron-down"></i>
-            </a>
-        </li>*@
     </ul>
 </div>
