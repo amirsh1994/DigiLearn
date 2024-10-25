@@ -16,5 +16,7 @@ public class CoreModuleDirectories
 
     public static string GetCvFile(string fileName) => $"{CvFileName.Replace("wwwroot","")}/{fileName}";
 
+    public static string GetCourseDemo(Guid courseId, string fileName)
+        => $"{CourseDemo(courseId).Replace("wwwroot", "")}/{fileName}";
 
 }

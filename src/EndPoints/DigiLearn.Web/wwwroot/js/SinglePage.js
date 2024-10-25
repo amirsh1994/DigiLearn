@@ -27,9 +27,11 @@ if (document.getElementById("text_area")) {
         }).then(editor => { window.editor = editor; });
 
 }
+
 $(".zmdi-close").click(function () {
     $(".top-banner").slideUp();
 });
+
 $("#episode").click(function () {
     $("#description").removeClass("selected");
     $(this).addClass("selected");
@@ -43,21 +45,23 @@ $("#description").click(function () {
     $("#episode").removeClass("selected");
     $(this).addClass("selected");
 });
+
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
-
 
 $(".show-menu").click(function () {
     $("body").css("height", "100vh");
     $(".overlay").fadeIn();
     $(".mobile-menu").animate({ right: "0px" }, 500)
 });
+
 $(".overlay").click(function () {
     $(".mobile-menu").animate({ right: "-310px" }, 500)
     $(".overlay").fadeOut();
     $("body").removeAttr("style");
 });
+
 $(".mobile-menu .zmdi-close").click(function () {
     $(".mobile-menu").animate({ right: "-310px" }, 500)
     $(".overlay").fadeOut();
@@ -95,6 +99,7 @@ $(".main-menu li a .zmdi-plus[data-sub]").click(function () {
         $(this).removeAttr("style");
     }
 });
+
 $(".auth-link").click(function () {
     $(".sub").slideToggle();
 })
@@ -121,3 +126,15 @@ $('.owl-carousel').owlCarousel({
         }
     }
 });
+
+function showEpisode(sectionId, token) {
+    var slug = $("#course").val();
+    $.ajax({
+        url: `/course/${slug}/showOnline?sectionId=${sectionId}&token=${token}`,
+        type: "get"
+    }).done(function (data) {
+        var myPlayer = videojs('my_video_1');
+        myPlayer.src({ type: 'video/mp4', src: data });
+        myPlayer.play();
+    });
+}

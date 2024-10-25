@@ -38,7 +38,7 @@ internal class GetCourseBySlugQueryHandler(QueryContext db) : IBaseQueryHandler<
             CategoryId = course.CategoryId,
             SubCategoryId = course.SubCategoryId,
             Title = course.Title,
-            Slug = course.Title,
+            Slug = course.Slug,
             Description = course.Description,
             ImageName = course.ImageName,
             VideoName = course.VideoName,
