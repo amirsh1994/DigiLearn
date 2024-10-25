@@ -1,5 +1,4 @@
 ﻿using Common.Query;
-using CoreModule.Domain.Courses.Enums;
 using CoreModule.Query._Data;
 using CoreModule.Query.Course._DTOs;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +59,7 @@ internal class GetCourseByIdQueryHandler(QueryContext db):IBaseQueryHandler<GetC
                     VideoName = e.VideoName,
                     AttachmentName = e.AttachmentName,
                     IsActive = e.IsActive,
+                    IsFree = e.IsFree,
                 }).ToList() 
             }).ToList()
         };

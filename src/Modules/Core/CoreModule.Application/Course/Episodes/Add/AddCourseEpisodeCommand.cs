@@ -27,6 +27,8 @@ public class AddCourseEpisodeCommand : IBaseCommand
     public IFormFile? AttachmentFile { get; set; }
 
     public bool IsActive { get; set; }
+
+    public bool IsFree { get; set; }
 }
 
 
@@ -51,7 +53,7 @@ public class AddCourseEpisodeCommandHandler(ICourseRepository repository, IFtpFi
         (
             request.Title, Guid.NewGuid(), request.TimeSpan,
             Path.GetExtension(request.VideoFile.FileName), attExName
-            , request.IsActive, request.SectionId, request.EnglishTitle.ToSlug()
+            , request.IsActive,request.IsFree, request.SectionId, request.EnglishTitle.ToSlug()
             );
         await SaveFile(request, episode);
         await repository.Save();

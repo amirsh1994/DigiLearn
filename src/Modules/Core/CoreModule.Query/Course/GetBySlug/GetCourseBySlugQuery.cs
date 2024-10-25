@@ -1,8 +1,5 @@
 ﻿using Common.Query;
-using CoreModule.Domain.Courses.Enums;
-using CoreModule.Domain.Teachers.Enums;
 using CoreModule.Query._Data;
-using CoreModule.Query._Data.Entities;
 using CoreModule.Query._DTOs;
 using CoreModule.Query.Category._DTOs;
 using CoreModule.Query.Course._DTOs;
@@ -70,7 +67,7 @@ internal class GetCourseBySlugQueryHandler(QueryContext db) : IBaseQueryHandler<
                     VideoName = e.VideoName,
                     AttachmentName = e.AttachmentName,
                     IsActive = e.IsActive,
-                    IsFree = e.IsActive
+                    IsFree = e.IsFree
                 }).ToList()
             }).ToList(),
             Teacher = new TeacherDto

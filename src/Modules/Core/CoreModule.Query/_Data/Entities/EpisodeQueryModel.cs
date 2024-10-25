@@ -22,6 +22,8 @@ internal class EpisodeQueryModel : BaseEntity
 
     public bool IsActive { get;set; }
 
+    public bool IsFree { get; set; }
+
     [ForeignKey(nameof(SectionId))]
     public SectionQueryModel Section { get; set; }
 }

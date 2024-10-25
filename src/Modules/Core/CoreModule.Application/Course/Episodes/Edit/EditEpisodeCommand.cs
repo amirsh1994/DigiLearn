@@ -27,6 +27,8 @@ public class EditEpisodeCommand : IBaseCommand
     public IFormFile? AttachmentFile { get; set; }
 
     public bool IsActive { get; set; }
+
+    public bool IsFree { get; set; }
 }
 
 
@@ -59,7 +61,7 @@ public class EditEpisodeCommandHandler(ICourseRepository repository, ILocalFileS
             await SaveVideoFile(request.VideoFile,episode,course.Id);
         }
 
-        course.EditEpisode(request.Id, request.SectionId, request.Title, request.IsActive, request.TimeSpan, atName);
+        course.EditEpisode(request.Id, request.SectionId, request.Title, request.IsActive,request.IsFree, request.TimeSpan, atName);
 
         await repository.Save();
 

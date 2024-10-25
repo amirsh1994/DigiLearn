@@ -38,37 +38,42 @@ public class EditEpisodeModel(ICourseFacade courseFacade) : BaseRazor
     [BindProperty]
     public bool IsActive { get; set; }
 
+    [BindProperty]
+    [Display(Name = "این قسمت رایگان است")]
+    public bool IsFree { get; set; }
 
-    public string?  VideoFileName { get; set; }
+
+    public string? VideoFileName { get; set; }
 
 
     public EpisodeDto? Episode { get; set; } = new();
 
 
-    public Guid ? CourseId { get; set; }
+    public Guid? CourseId { get; set; }
 
 
-    public async Task<IActionResult> OnGet(Guid episodeId,Guid courseId)
+    public async Task<IActionResult> OnGet(Guid episodeId, Guid courseId)
     {
         var episode = await courseFacade.GetEpisodeById(episodeId);
-        if (episode==null)
+        if (episode == null)
         {
             return RedirectToPage("../Index", new { courseId });
         }
 
         Title = episode.Title;
-        IsActive=episode.IsActive;
+        IsActive = episode.IsActive;
         Time = episode.TimeSpan;
         VideoFileName = episode.VideoName;
-        Episode=episode;
+        Episode = episode;
         CourseId = courseId;
+        IsFree=episode.IsFree;
 
         return Page();
     }
 
-    public async Task<IActionResult> OnPost(Guid episodeId,Guid courseId)
+    public async Task<IActionResult> OnPost(Guid episodeId, Guid courseId)
     {
-        var episode=await courseFacade.GetEpisodeById(episodeId);
+        var episode = await courseFacade.GetEpisodeById(episodeId);
         var result = await courseFacade.EditEpisode(new EditEpisodeCommand
         {
             Id = episodeId,
@@ -78,7 +83,9 @@ public class EditEpisodeModel(ICourseFacade courseFacade) : BaseRazor
             TimeSpan = Time,
             VideoFile = VideoFile,
             AttachmentFile = AttachmentFile,
-            IsActive = IsActive
+            IsActive = IsActive,
+            IsFree = IsFree
+
         });
         return RedirectAndShowAlert(result, RedirectToPage("Index", new { courseId }));
     }

@@ -128,7 +128,7 @@ public class Course : AggregateRoot
         Sections.Remove(section);
     }
 
-    public Episode AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoExtenstion, string? attachmentExtenstion, bool isActive, Guid sectionId, string englishTitle)
+    public Episode AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoExtenstion, string? attachmentExtenstion, bool isActive, bool isFree,Guid sectionId, string englishTitle)
     {
         var section = Sections.FirstOrDefault(x => x.Id == sectionId);
 
@@ -156,7 +156,7 @@ public class Course : AggregateRoot
             }
         }
 
-        return section.AddEpisode(title, token, timeSpan, vidName, atName, isActive, englishTitle);
+        return section.AddEpisode(title, token, timeSpan, vidName, atName, isActive,isFree, englishTitle);
     }
 
     public void AcceptEpisode(Guid episodeId)
@@ -184,7 +184,7 @@ public class Course : AggregateRoot
         return episode;
     }
 
-    public void EditEpisode(Guid episodeId, Guid sectionId, string title, bool isActive, TimeSpan timeSpan, string? attachmentName)
+    public void EditEpisode(Guid episodeId, Guid sectionId, string title, bool isActive,bool isFree ,TimeSpan timeSpan, string? attachmentName)
     {
         var section = Sections.FirstOrDefault(x => x.Id == sectionId);
         if (section == null)
@@ -195,7 +195,7 @@ public class Course : AggregateRoot
             throw new InvalidDomainDataException("episodeId is not valid....domain Edit Episode");
 
 
-        episode.Edit(title, isActive, timeSpan, attachmentName);
+        episode.Edit(title, isActive, isFree,timeSpan, attachmentName);
     }
 
     public Episode? GetEpisodeById(Guid sectionId, Guid episodeId)
@@ -227,9 +227,9 @@ public class Section : BaseEntity
         CourseId = courseId;
     }
 
-    public Episode AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, string englishTitle)
+    public Episode AddEpisode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive,bool isFree, string englishTitle)
     {
-        var episode = new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id, englishTitle);
+        var episode = new Episode(title, token, timeSpan, videoName, attachmentName, isActive, Id, englishTitle,isFree);
         Episodes.Add(episode);
         return episode;
     }
@@ -260,8 +260,10 @@ public class Episode : BaseEntity
 
     public bool IsActive { get; private set; }
 
+    public bool IsFree { get; set; }
 
-    public Episode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, Guid sectionId, string englishTitle)
+
+    public Episode(string title, Guid token, TimeSpan timeSpan, string videoName, string? attachmentName, bool isActive, Guid sectionId, string englishTitle,bool isFree)
     {
         Guard(videoName, englishTitle, title);
         Title = title;
@@ -272,6 +274,7 @@ public class Episode : BaseEntity
         IsActive = isActive;
         SectionId = sectionId;
         EnglishTitle = englishTitle;
+        IsFree=isFree;
     }
 
     void Guard(string videoName, string englishTitle, string title)
@@ -290,15 +293,18 @@ public class Episode : BaseEntity
         IsActive = !IsActive;
     }
 
-    public void Edit(string title, bool isActive, TimeSpan timeSpan, string? attachmentName)
+    public void Edit(string title, bool isActive,bool isFree, TimeSpan timeSpan, string? attachmentName)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         Title = title;
         IsActive = isActive;
         TimeSpan = timeSpan;
+        IsFree=isFree;
         if (string.IsNullOrWhiteSpace(attachmentName) == false)
         {
             AttachmentName = attachmentName;
         }
     }
+
+
 }

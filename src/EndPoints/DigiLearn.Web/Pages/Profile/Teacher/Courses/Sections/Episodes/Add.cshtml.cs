@@ -39,6 +39,11 @@ public class AddModel(ICourseFacade courseFacade):BaseRazor
     [FileType("rar",ErrorMessage = "فایل ضمیمه نامعتبر میباشد")]
     public IFormFile? AttachmentFile { get; set; }
 
+
+    [Display(Name = "این قسمت رایگان است")]
+    public bool IsFree { get; set; }
+
+
     public void OnGet()
     {
     }
@@ -53,7 +58,8 @@ public class AddModel(ICourseFacade courseFacade):BaseRazor
             TimeSpan = TimeSpan,
             VideoFile = VideoFile,
             AttachmentFile = AttachmentFile,
-            IsActive = false
+            IsActive = false,
+            IsFree = IsFree,
         });
         return RedirectAndShowAlert(result, RedirectToPage("../Index", new { courseId }));
     }

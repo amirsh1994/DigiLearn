@@ -24,6 +24,7 @@
                             <th>عنوان</th>
                             <th>زمان</th>
                             <th>وضیعیت</th>
+                            <th>رایگان</th>
                             <th>عملیات</th>
                         </tr>
                     </thead>
@@ -42,6 +43,16 @@
                                     else
                                     {
                                         <label class="badge badge-danger">غیرفعال</label>
+                                    }
+                                </td>
+                                <td>
+                                    @if (e.IsFree)
+                                    {
+                                        <i class="bx bx-check text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bx bx-window-close text-danger"></i>
                                     }
                                 </td>
                                 <td>

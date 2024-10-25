@@ -31,6 +31,7 @@ internal  class GetEpisodeByIdQueryHandler(QueryContext db):IBaseQueryHandler<Ge
             VideoName = episode.VideoName,
             AttachmentName = episode.AttachmentName,
             IsActive = episode.IsActive,
+            IsFree = episode.IsFree,
         };
 
     }

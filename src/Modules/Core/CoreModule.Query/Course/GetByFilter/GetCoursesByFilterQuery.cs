@@ -19,6 +19,7 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
             .Include(x=>x.Teacher.User)
             .Include(x => x.Sections)
             .ThenInclude(x => x.Episodes)
+            .AsSplitQuery()
             .AsQueryable();
 
         q = @params.CourseFilterSort switch
@@ -78,7 +79,7 @@ internal class GetCourseByFilterQueryHandler(QueryContext db) : IBaseQueryHandle
                         VideoName = e.VideoName,
                         AttachmentName = e.AttachmentName,
                         IsActive = e.IsActive,
-                        IsFree = e.IsActive
+                        IsFree = e.IsFree
                     }).ToList()
                 }).ToList()
             }).ToList()
