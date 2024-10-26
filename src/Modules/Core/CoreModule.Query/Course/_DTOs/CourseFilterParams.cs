@@ -9,12 +9,29 @@ public class CourseFilterParams:BaseFilterParam
 {
     public Guid ? TeacherId { get; set; }
 
-    public CourseActionStatus ? ActionStatus { get; set; }
+    public CourseActionStatus ? ActionStatus { get; set; } //Active,DiActive,Pending
 
-    public CourseFilterSort CourseFilterSort { get; set; } = CourseFilterSort.Latest;
+    public CourseFilterSort FilterSort { get; set; } = CourseFilterSort.Latest;
 
+    public SearchByPrice SearchByPrice { get; set; } = SearchByPrice.All;
+
+    public CourseStatus? CourseStatus { get; set; }//inprogress,  Completed, StartSoon
+
+    public CourseLevel? CourseLevel { get; set; }
+
+    public string CategorySlug { get; set; }
+
+    public string Search { get; set; }
 
 }
+
+public enum SearchByPrice
+{
+    All,
+    Free,
+    NotFree
+}
+
 public class CourseFilterData:BaseDto
 {
     public string ImageName { get; set; }

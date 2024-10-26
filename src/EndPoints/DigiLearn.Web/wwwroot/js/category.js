@@ -1,5 +1,9 @@
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
+
+    $("select").change(function() {
+        $("#filter_Form").submit();
+    });
 });
 
 $(".show-menu").click(function () {
@@ -7,11 +11,13 @@ $(".show-menu").click(function () {
     $(".overlay").fadeIn();
     $(".mobile-menu").animate({ right: "0px" }, 500)
 });
+
 $(".overlay").click(function () {
     $(".mobile-menu").animate({ right: "-310px" }, 500)
     $(".overlay").fadeOut();
     $("body").removeAttr("style");
 });
+
 $(".mobile-menu .zmdi-close").click(function () {
     $(".mobile-menu").animate({ right: "-310px" }, 500)
     $(".overlay").fadeOut();
@@ -49,9 +55,11 @@ $(".main-menu li a .zmdi-plus[data-sub]").click(function () {
         $(this).removeAttr("style");
     }
 });
-$(".auth-link").click(function () {
+
+$(".auth-link").click(function() {
     $(".sub").slideToggle();
-})
+});
+
 $("[for]").click(function () {
     var value = $(this).attr("for");
     var id = "#" + value;
@@ -60,7 +68,11 @@ $("[for]").click(function () {
 
     var otherSelector = "[for!=" + value + "]";
     $(otherSelector).removeClass("active")
+
+    $("#FilterParams_SearchByPrice").val($("input[name='priceFilter']:checked").val());
+    $("#filter_Form").submit();
 });
+
 $("[checkfor]").click(function () {
     var isSelected = $(this).hasClass("selected");
     if (isSelected) {
@@ -72,6 +84,11 @@ $("[checkfor]").click(function () {
         var value = $(this).attr("checkfor");
         var id = "#" + value;
         $(id).prop("checked", true);
-        $(this).addClass("selected")
+        $(this).addClass("selected");
     }
+    $("#FilterParams_CategorySlug").val($("input[name='category']:checked").val());
+    $("#filter_Form").submit();
 });
+
+
+

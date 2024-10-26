@@ -22,7 +22,7 @@ public class HomePageService(ICourseFacade courseFacade):IHomePageService
             PageId = 1,
             Take = 8,
             ActionStatus = CourseActionStatus.Active,
-            CourseFilterSort = CourseFilterSort.Latest
+            FilterSort = CourseFilterSort.Latest
         });
         var homePageViewModel = new HomePageViewModel()
         {
