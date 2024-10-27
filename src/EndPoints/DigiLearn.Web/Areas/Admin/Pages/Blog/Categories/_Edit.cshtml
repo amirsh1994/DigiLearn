@@ -1,0 +1,18 @@
+﻿@model BlogModule.Services.DTOs.Command.EditBlogCategoryCommand
+
+
+    <form asp-page="Index" asp-page-handler="Edit" class="row" data-ajax="true">
+        @Html.HiddenFor(x=>x.Id)
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.Title)
+        </div>
+
+        <div class="col-md-6">
+            @Html.EditorFor(x => x.Slug)
+        </div>
+
+        <div class="col-md-12 mt-2 d-flex justify-content-end">
+            <submit/>
+        </div>
+    </form>
+

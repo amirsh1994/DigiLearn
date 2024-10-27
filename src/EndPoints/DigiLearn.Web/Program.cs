@@ -1,3 +1,4 @@
+using BlogModule;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using Common.EventBus.Abstractions;
@@ -24,7 +25,9 @@ public class Program
             .InitUserModule(builder.Configuration)
             .InitTicketModule(builder.Configuration)
             .InitCoreModule(builder.Configuration)
+            .InitBlogModules(builder.Configuration)
             .RegisterWebDependencies();
+
         builder.Services.AddScoped<ILocalFileService, LocalFileService>();
         builder.Services.AddScoped<IFtpFileService, FtpFileService>();
         builder.Services.AddTransient<TeacherActionFilter>();
@@ -39,7 +42,7 @@ public class Program
             app.UseHsts();
         }
 
-        app.Use((context, next) =>
+        app.Use((context,next) =>
         {
             var token = context.Request.Cookies["digi_Token"]?.ToString();
             if (string.IsNullOrWhiteSpace(token) == false)

@@ -9,7 +9,7 @@ public class MapperProfile:Profile
 {
     public MapperProfile()
     {
-        CreateMap<Category,CreateCategoryCommand>().ReverseMap();
+        CreateMap<Category,CreateBlogCategoryCommand>().ReverseMap();
 
         CreateMap<Category,BlogCategoryDto>().ReverseMap();
 

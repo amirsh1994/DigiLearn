@@ -6,14 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogModule.Repositories.Categories;
 
-internal interface ICategoryRepository : IBaseRepository<Category>
+internal interface ICategoryRepository:IBaseRepository<Category>
 {
     void Delete(Category category);
 
     Task<List<Category>> GetAll();
 }
 
-internal class CategoryRepository(BlogContext context) : BaseRepository<Category, BlogContext>(context), ICategoryRepository
+internal class CategoryRepository(BlogContext context):BaseRepository<Category,BlogContext>(context),ICategoryRepository
 {
     public void Delete(Category category)
     {

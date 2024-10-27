@@ -11,11 +11,11 @@ using Common.Application.SecurityUtil;
 
 namespace BlogModule.Services;
 
-internal interface IBlogService
+public interface IBlogService
 {
-    Task<OperationResult> CreateCategory(CreateCategoryCommand command);
+    Task<OperationResult> CreateCategory(CreateBlogCategoryCommand command);
 
-    Task<OperationResult> EditCategory(EditCategoryCommand command);
+    Task<OperationResult> EditCategory(EditBlogCategoryCommand command);
 
     Task<OperationResult> Delete(Guid categoryId);
 
@@ -36,7 +36,7 @@ internal interface IBlogService
 internal class BlogService(ICategoryRepository categoryRepository, IMapper mapper, IPostRepository postRepository, ILocalFileService fileService) : IBlogService
 {
 
-    public async Task<OperationResult> CreateCategory(CreateCategoryCommand command)
+    public async Task<OperationResult> CreateCategory(CreateBlogCategoryCommand command)
     {
         if (await categoryRepository.ExistsAsync(x => x.slug == command.Slug))
         {
@@ -48,7 +48,7 @@ internal class BlogService(ICategoryRepository categoryRepository, IMapper mappe
         return OperationResult.Success();
     }
 
-    public async Task<OperationResult> EditCategory(EditCategoryCommand command)
+    public async Task<OperationResult> EditCategory(EditBlogCategoryCommand command)
     {
         var category = await categoryRepository.GetAsync(command.Id);
         if (category == null)
